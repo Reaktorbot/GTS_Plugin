@@ -1,4 +1,4 @@
-#include "hooks/main.h"
+#include "hooks/havok.h"
 #include "util.h"
 
 #include "managers/contact.h"
