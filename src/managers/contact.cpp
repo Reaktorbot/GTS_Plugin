@@ -153,13 +153,18 @@ namespace Gts {
 			log::info("Both collisions are actors");
 			Actor* actor_a = skyrim_cast<Actor*>(objref_a);
 			if (!actor_a) return;
+			log::info("Actor A valid");
 			Actor* actor_b = skyrim_cast<Actor*>(objref_b);
 			if (!actor_b) return;
+			log::info("Actor B valid");
 			if (actor_a == actor_b) return;
+			log::info("Actor A!=B");
 			auto name_a = actor_a->GetDisplayFullName();
 			if (!name_a) return;
+			log::info("Name A Valid");
 			auto name_b = actor_b->GetDisplayFullName();
 			if (!name_b) return;
+			log::info("Name B Valid");
 			log::info("Colliding: {} with: {}", name_a, name_b);
 			NiAVObject* node_a = getNodeFromCollidable(rigid_a);
 			if (!node_a) return;
