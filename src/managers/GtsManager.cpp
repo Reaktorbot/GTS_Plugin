@@ -199,7 +199,7 @@ void GtsManager::poll() {
 	player_char->GetCharController()->swimFloatHeight = 3.6;
 	float SwimHeight = player_char->GetCharController()->swimFloatHeight;
 	NiPoint3 pos = player_char->GetPosition();
-	player_char->actorState1.swimming = static_cast<std::uint32_t>(false);
+	player_char->actorState1.swimming = static_cast<std::uint32_t>(true);
 	
 	if (cell->GetWaterHeight(pos, water_height)){
  	  log::info("Water height: {}", water_height);
