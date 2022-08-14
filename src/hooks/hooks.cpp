@@ -19,7 +19,7 @@ namespace Hooks
 		trampoline.create(256);
 
 		Hook_MainUpdate::Hook(trampoline);
-		Hook_Actor::Hook();
+		//Hook_Actor::Hook();
 		//Hook_Character::Hook();
 		//Hook_Player::Hook();
 		//Hook_BGSImpactManager::Hook();
