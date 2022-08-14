@@ -199,6 +199,7 @@ void GtsManager::poll() {
 	NiPoint3 pos = player_char->GetPosition();
 	if (cell->GetWaterHeight(pos, water_height)){
  	  log::info("Water height: {}", water_height);
+	  log::info("Character 3 pos: {}", pos);
 	} 
 	else 
 	{
