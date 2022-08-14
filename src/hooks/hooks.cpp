@@ -21,7 +21,7 @@ namespace Hooks
 		Hook_MainUpdate::Hook(trampoline);
 		Hook_Actor::Hook();
 		Hook_Character::Hook();
-		Hook_Player::Hook();
+		//Hook_Player::Hook();
 		//Hook_BGSImpactManager::Hook();
 		//Hook_VM::Hook();
 		//Hook_Havok::Hook(trampoline);
