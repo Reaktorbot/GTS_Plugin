@@ -204,7 +204,7 @@ void GtsManager::poll() {
 	
 	
 	if (cell->GetWaterHeight(pos, water_height)){
-		if (water_height <= SwimRequirement)
+		if (SwimRequirement <= water_height)
 		{
 		    player_char->actorState1.swimming = static_cast<std::uint32_t>(true);
 		    const RE::hkVector4 hkv = { -10.00f, -10.00f, -10.00f, -10.00f };
