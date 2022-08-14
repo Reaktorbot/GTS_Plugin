@@ -19,12 +19,12 @@ namespace Hooks
 		trampoline.create(256);
 
 		Hook_MainUpdate::Hook(trampoline);
-		//Hook_Actor::Hook();
-		//Hook_Character::Hook();
-		//Hook_Player::Hook();
-		//Hook_BGSImpactManager::Hook();
-		//Hook_VM::Hook();
-		//Hook_Havok::Hook(trampoline);
+		Hook_Actor::Hook();
+		Hook_Character::Hook();
+		Hook_Player::Hook();
+		Hook_BGSImpactManager::Hook();
+		Hook_VM::Hook();
+		Hook_Havok::Hook(trampoline);
 
 		using func_t = decltype(&IAnimationGraphManagerHolder::SetGraphVariableBool);
 		REL::Relocation<func_t> func{ RELOCATION_ID(32141, 32885) };
