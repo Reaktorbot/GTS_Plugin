@@ -183,6 +183,9 @@ GtsManager& GtsManager::GetSingleton() noexcept {
 
 // Poll for updates
 void GtsManager::poll() {
+	
+	
+	
 	if (!this->enabled) {
 		return;
 	}
@@ -190,6 +193,20 @@ void GtsManager::poll() {
 	if (!player_char) {
 		return;
 	}
+	auto Player = player_char;
+	auto cell = Player->GetParentCell();
+	if (!cell) return;
+	float water_height = 0.0;
+	NiPoint3 pos = Player->GetPosition();
+	if (cell->GetWaterHeight(pos, water_height)){
+ 	 log::info("Water height: {}", water_height);
+	} 
+	else 
+	{
+ 	 log::info("No water");
+	}
+	
+	
 	if (!player_char->Is3DLoaded()) {
 		return;
 	}
