@@ -199,7 +199,7 @@ void GtsManager::poll() {
 	player_char->GetCharController()->swimFloatHeight = 3.6;
 	float SwimHeight = player_char->GetCharController()->swimFloatHeight;
 	NiPoint3 pos = player_char->GetPosition();
-	float SwimRequirement = pos.z + 200.0;
+	float SwimRequirement = pos.z - 200.0;
 	
 	
 	
