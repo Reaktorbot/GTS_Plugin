@@ -23,7 +23,7 @@ namespace Hooks
 		Hook_Character::Hook();
 		Hook_Player::Hook();
 		Hook_BGSImpactManager::Hook();
-		Hook_VM::Hook();
+		//Hook_VM::Hook();
 		//Hook_Havok::Hook(trampoline);
 
 		using func_t = decltype(&IAnimationGraphManagerHolder::SetGraphVariableBool);
