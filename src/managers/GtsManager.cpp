@@ -196,7 +196,7 @@ void GtsManager::poll() {
 	auto cell = player_char->GetParentCell();
 	if (!cell) return;
 	float water_height = 0.0;
-	float SwimHeight = player_chat->GetCharController()->swimFloatHeight;
+	float SwimHeight = player_char->GetCharController()->swimFloatHeight;
 	NiPoint3 pos = player_char->GetPosition();
 	player_char->actorState1.swimming = static_cast<std::uint32_t>(false);
 	if (cell->GetWaterHeight(pos, water_height)){
