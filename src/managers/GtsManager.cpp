@@ -207,7 +207,7 @@ void GtsManager::poll() {
 		if (SwimRequirement <= water_height)
 		{
 		    player_char->actorState1.swimming = static_cast<std::uint32_t>(true);
-		    const RE::hkVector4 hkv = { -10.00f, -10.00f, -10.00f, -10.00f };
+		    const RE::hkVector4 hkv = { 0.00f, 0.00f, 0.00f, 0.00f };
                     player_char->GetCharController()->SetLinearVelocityImpl(hkv);
 		    player_char->GetCharController()->gravity = 10.00f;
 			log::info("Water height: {}", water_height);
