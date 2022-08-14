@@ -193,11 +193,10 @@ void GtsManager::poll() {
 	if (!player_char) {
 		return;
 	}
-	auto Player = player_char;
-	auto cell = Player->GetParentCell();
+	auto cell = player_char->GetParentCell();
 	if (!cell) return;
 	float water_height = 0.0;
-	NiPoint3 pos = Player->GetPosition();
+	NiPoint3 pos = player_char->GetPosition();
 	if (cell->GetWaterHeight(pos, water_height)){
  	  log::info("Water height: {}", water_height);
 	} 
