@@ -198,13 +198,21 @@ void GtsManager::poll() {
 	float water_height = 0.0;
 	player_char->GetCharController()->swimFloatHeight = 3.6;
 	float SwimHeight = player_char->GetCharController()->swimFloatHeight;
+	float SwimRequirement = 120.0
 	NiPoint3 pos = player_char->GetPosition();
-	player_char->actorState1.swimming = static_cast<std::uint32_t>(true);
+	
 	
 	if (cell->GetWaterHeight(pos, water_height)){
- 	  log::info("Water height: {}", water_height);
+		if (SwimHeight >= SwimRequirement)
+		{
+		    player_char->actorState1.swimming = static_cast<std::uint32_t>(true);
+		    const RE::hkVector4 hkv = { -1.00f, -1.00f, -1.00f, -1.00f };
+                    player_char->GetCharController()->SetLinearVelocityImpl(hkv);
+		    player_char->GetCharController()->gravity = 10.00f	
+			log::info("Water height: {}", water_height);
 	  log::info("Character 3 pos: {},{},{}", pos.x, pos.y, pos.z);
 	  log::info("Swim Height: {}", SwimHeight);
+		}
 	} 
 	else 
 	{
