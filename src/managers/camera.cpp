@@ -150,7 +150,7 @@ namespace Gts {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
         //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
     if (player.isSneaking() == true && ImProne == true)
-        {CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
+        {CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance);}
         else
          {CameraManager::ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
 
@@ -158,8 +158,8 @@ namespace Gts {
     {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
        // Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
-        if (player.isSneaking() == true && ImProne == true)
-              {CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
+        if (player->isSneaking() == true && ImProne == true)
+              {CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance);}
           else
              {CameraManager::ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}          
 
@@ -167,10 +167,10 @@ namespace Gts {
    {
     //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision);
     //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2);
-        if (player.isSneaking() == true && ImProne == true)
+        if (player->isSneaking() == true && ImProne == true)
             {CameraManager::ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);}
         else
-            {CameraManager::ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
+            {CameraManager::ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
 
     }	
 
@@ -184,14 +184,10 @@ namespace Gts {
 	// Run when player size changes
 	// Last known size is the size when this camera check was last
 	// run
-	void CameraManager::OnScaleChanged(float new_size, float last_known_size) {
-	}
+	void CameraManager::OnScaleChanged(float new_size, float last_known_size) 
+	{}
 
-
-
-
-
-	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
+	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool)
 	{float cameraYCorrection = 121.0;
 	float Size = 1.0; float UpDown = 1.0;
     const CalcProne = runtime.CalcProne->value;
@@ -221,7 +217,7 @@ namespace Gts {
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }}
 
-	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
+	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool)
 	{
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
     	float CalcProne2 = runtime.CalcProne->value;
