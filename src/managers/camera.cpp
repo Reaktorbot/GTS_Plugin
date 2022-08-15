@@ -46,7 +46,7 @@ namespace Gts {
 		}
 	}
 
-	inline float CameraManager::GetfOverShoulderPosZ() {
+	float CameraManager::GetfOverShoulderPosZ(RE::Character* a_this) {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
@@ -57,7 +57,7 @@ namespace Gts {
 		}
 	}
 
-	inline float CameraManager::GetfOverShoulderPosX() {
+	float CameraManager::GetfOverShoulderPosX(RE::Character* a_this) {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
@@ -68,7 +68,7 @@ namespace Gts {
 		}
 	}
 
-	inline float CameraManager::GetfOverShoulderPosY() {
+	float CameraManager::GetfOverShoulderPosY(RE::Character* a_this) {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
@@ -150,27 +150,27 @@ namespace Gts {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
         //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
     if (player.isSneaking() == true && ImProne == true)
-        {ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
+        {CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
         else
-         {ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
+         {CameraManager::ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
 
     else if (EnableAltCamera >= 1.0) // Adjustment for Alternate Camera 
     {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
        // Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
         if (player.isSneaking() == true && ImProne == true)
-              {ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
+              {CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
           else
-             {ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}          
+             {CameraManager::ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}          
 
    else if (EnableCamera >= 1.0) // Regular Camera
    {
     //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision);
     //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2);
         if (player.isSneaking() == true && ImProne == true)
-            {ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);}
+            {CameraManager::ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);}
         else
-            {ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
+            {CameraManager::ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
 
     }	
 
