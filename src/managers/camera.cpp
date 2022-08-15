@@ -232,10 +232,10 @@ namespace Gts {
     }	
 
 
-		if (fabs(size - this->last_scale) > 1e-4) {
-			this->OnScaleChanged(size, this->last_scale);
-			this->last_scale = size;
-		}
+		//if (fabs(size - this->last_scale) > 1e-4) {
+			//this->OnScaleChanged(size, this->last_scale);
+		//	this->last_scale = size;
+		//}
 	
 
 	// Run when player size changes
