@@ -79,10 +79,10 @@ namespace Gts {
 		}
 	}
 
-	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool)
-	{float cameraYCorrection = 121.0;
-	float Size = 1.0; float UpDown = 1.0;
-    const CalcProne = runtime.CalcProne->value;
+	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool) {
+		float cameraYCorrection = 121.0;
+		float Size = 1.0; float UpDown = 1.0;
+   		const CalcProne = runtime.CalcProne->value;
 
     CameraManager::SetfOverShoulderPosX(((X + Side) * size)); 
     CameraManager::SetfOverShoulderPosZ(((Y + UpDown) * size) - cameraYCorrection);
@@ -95,11 +95,11 @@ namespace Gts {
 
     //Utility.setINIFloat("fOverShoulderCombatPosX:Camera", ((AltX + Side) * size));
     //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", (((AltY + UpDown) * size) - cameraYCorrection2));
-    if (usingAutoDistance <= 0.0)
-    {
+   // if (usingAutoDistance <= 0.0)
+   // {
     //Utility.setINIFloat("fVanityModeMinDist:Camera", MinDistance * size);
     //Utility.setINIFloat("fVanityModeMaxDist:Camera", MaxDistance * size);
-    }
+   // }
 
     if (PlayerCharacter::GetSingleton().isSneaking() == true && ImProne == true)
     {
@@ -109,8 +109,7 @@ namespace Gts {
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }}
 
-	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool)
-	{
+	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance: float, ImProne: bool) {
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
     	float CalcProne2 = runtime.CalcProne->value;
 		float Size = 1.0; float UpDown = 1.0;
@@ -133,8 +132,6 @@ namespace Gts {
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }
-
-	
 }
 
 	// Run every frame
@@ -245,4 +242,4 @@ namespace Gts {
 	void CameraManager::OnScaleChanged(float new_size, float last_known_size) 
 	{}
 
-	}
+}
