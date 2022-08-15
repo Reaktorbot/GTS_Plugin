@@ -22,8 +22,8 @@ namespace Gts {
 
 			void OnScaleChanged(float new_scale, float old_scale);
 
-			void ApplyCameraSettings(float value, float value, float value, float value, float value, float value, float value, float value, bool value);
-			void ApplyFeetCameraSettings(float value, float value, float value, float value, float value, float value, float value, float value, bool value);
+			void ApplyCameraSettings(float size, float x, float y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne);
+			void ApplyFeetCameraSettings(float size, float x, float y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne);
 
 		private:
 			float last_scale = -1.0;
