@@ -141,7 +141,7 @@ namespace Gts {
 		auto player = PlayerCharacter::GetSingleton();
 		auto& runtime = Runtime::GetSingleton();
 		bool ImProne = false;
-		float current_size = get_visual_scale(player);
+		float size = get_visual_scale(player);
 		float ScaleMethod = 0.0;
 		SizeMethod method = Persistent::GetSingleton().size_method;
 
