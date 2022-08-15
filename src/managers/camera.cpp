@@ -242,4 +242,4 @@ namespace Gts {
 	void CameraManager::OnScaleChanged(float new_size, float last_known_size) 
 	{}
 
-}
+}}
