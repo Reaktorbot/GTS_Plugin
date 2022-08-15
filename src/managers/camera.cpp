@@ -63,7 +63,7 @@ namespace Gts {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
 			if (camera_state) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.X;
+				return third_person_state->posOffsetExpected.x;
 			}
 		}
 	}
@@ -74,7 +74,7 @@ namespace Gts {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
 			if (camera_state) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.Y;
+				return third_person_state->posOffsetExpected.y;
 			}
 		}
 	}
