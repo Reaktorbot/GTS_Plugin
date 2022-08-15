@@ -102,7 +102,7 @@ namespace Gts {
     //Utility.setINIFloat("fVanityModeMaxDist:Camera", MaxDistance * size);
    // }
 
-    if (PlayerCharacter::GetSingleton()->isSneaking() == true && ImProne == true)
+    if (PlayerCharacter::GetSingleton()->IsSneaking() == true && ImProne == true)
     {
         float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
         float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
@@ -127,7 +127,7 @@ namespace Gts {
     //Utility.setINIFloat("fVanityModeMaxDist:Camera", MaxDistance * size);
     }
 
-    if (PlayerCharacter::GetSingleton()->isSneaking() == true && ImProne == true)
+    if (PlayerCharacter::GetSingleton()->IsSneaking() == true && ImProne == true)
     {
         float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
         float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
@@ -206,7 +206,7 @@ namespace Gts {
     {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
         //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
-    if (player->isSneaking() == true && ImProne == true)
+    if (player->IsSneaking() == true && ImProne == true)
         {CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
         else
          {CameraManager::ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
@@ -215,7 +215,7 @@ namespace Gts {
     {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
        // Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
-        if (player->isSneaking() == true && ImProne == true)
+        if (player->IsSneaking() == true && ImProne == true)
               {CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
           else
              {CameraManager::ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}          
@@ -224,7 +224,7 @@ namespace Gts {
    {
     //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision);
     //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2);
-        if (player->isSneaking() == true && ImProne == true)
+        if (player->IsSneaking() == true && ImProne == true)
             {CameraManager::ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);}
         else
             {CameraManager::ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
