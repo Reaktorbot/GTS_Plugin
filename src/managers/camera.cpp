@@ -79,7 +79,7 @@ namespace Gts {
 		}
 	}
 
-	void CameraManager::ApplyCameraSettings(size, X, Y, AltX, AltY, MinDistance, MaxDistance, usingAutoDistance, ImProne) {
+	void CameraManager::ApplyCameraSettings(Float size, Float X, Float Y, Float AltX, Float AltY, Float MinDistance, Float MaxDistance, Float usingAutoDistance, Bool ImProne) {
 		float cameraYCorrection = 121.0;
 		float UpDown = 1.0;
    		const CalcProne = runtime.CalcProne->value;
@@ -109,7 +109,7 @@ namespace Gts {
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }}
 
-	void CameraManager::ApplyFeetCameraSettings(size, X, Y, AltX, AltY, MinDistance, MaxDistance, usingAutoDistance, ImProne) {
+	void CameraManager::ApplyFeetCameraSettings(Float size, Float X, Float Y, Float AltX, Float AltY, Float MinDistance, Float MaxDistance, Float usingAutoDistance, Bool ImProne)) {
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
     	float CalcProne2 = runtime.CalcProne->value;
 		float UpDown = 1.0;
