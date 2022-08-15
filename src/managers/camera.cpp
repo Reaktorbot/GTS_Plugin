@@ -80,6 +80,7 @@ namespace Gts {
 	}
 
 	void CameraManager::ApplyCameraSettings(float size, float X, float Y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne) {
+		auto& runtime = Runtime::GetSingleton();
 		float cameraYCorrection = 121.0;
 		float UpDown = 1.0; float Side = 1.0;
    		float CalcProne = runtime.CalcProne->value;
@@ -110,6 +111,7 @@ namespace Gts {
     }}
 
 	void CameraManager::ApplyFeetCameraSettings(float size, float X, float Y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne)) {
+		auto& runtime = Runtime::GetSingleton();
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
     	float CalcProne2 = runtime.CalcProne->value;
 		float UpDown = 1.0; float Side = 1.0;
