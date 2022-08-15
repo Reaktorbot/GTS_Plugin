@@ -115,6 +115,7 @@ namespace Gts {
 		this->ShrinkBackSpell = find_form<MagicItem>("GTS.esp|005368");
 
 		///Camera
+		this->EnableCamera = find_form<TESGlobal>("GTS.esp|290512");
 		this->EnableAltCamera = find_form<TESGlobal>("GTS.esp|290513");
 		this->FeetCamera = find_form<TESGlobal>("GTS.esp|290525");
 		this->usingAutoDistance = find_form<TESGlobal>("GTS.esp|290524");

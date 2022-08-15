@@ -97,6 +97,7 @@ namespace Gts {
 			MagicItem * ShrinkBackSpell = nullptr;
 
 			///Camera
+		TESGlobal * EnableCamera = nullptr;
 		TESGlobal * EnableAltCamera = nullptr;
 		TESGlobal * FeetCamera = nullptr;
 		TESGlobal * usingAutoDistance = nullptr;
