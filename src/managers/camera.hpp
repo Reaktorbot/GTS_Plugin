@@ -12,10 +12,12 @@ namespace Gts {
 			[[nodiscard]] static CameraManager& GetSingleton() noexcept;
 
 			void SetfOverShoulderPosX(float value);
+			void SetfOverShoulderPosY(float value);
+			void SetfOverShoulderPosZ(float value);
 
 			void Update();
 
-			void OnScaleChanged(float new, float old);
+			void OnScaleChanged(float new_scale, float old_scale);
 
 		private:
 			float last_scale = -1.0;

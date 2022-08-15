@@ -16,10 +16,30 @@ namespace Gts {
 	void CameraManager::SetfOverShoulderPosX(float value) {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson];
+			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
 			if (camera_state) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state).get();
+				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				third_person_state->posOffsetExpected.x = value;
+			}
+		}
+	}
+	void CameraManager::SetfOverShoulderPosY(float value) {
+		auto camera = PlayerCamera::GetSingleton();
+		if (camera) {
+			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+			if (camera_state) {
+				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+				third_person_state->posOffsetExpected.y = value;
+			}
+		}
+	}
+	void CameraManager::SetfOverShoulderPosZ(float value) {
+		auto camera = PlayerCamera::GetSingleton();
+		if (camera) {
+			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+			if (camera_state) {
+				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+				third_person_state->posOffsetExpected.z = value;
 			}
 		}
 	}
