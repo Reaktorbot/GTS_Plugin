@@ -20,7 +20,7 @@ namespace Gts {
 
 			void Update();
 
-			void OnScaleChanged(float new_scale, float old_scale);
+			//void OnScaleChanged(float new_scale, float old_scale);
 
 			void ApplyCameraSettings(float size, float x, float y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne);
 			void ApplyFeetCameraSettings(float size, float x, float y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne);
