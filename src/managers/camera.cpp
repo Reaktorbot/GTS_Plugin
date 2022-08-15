@@ -241,7 +241,7 @@ namespace Gts {
 	// Run when player size changes
 	// Last known size is the size when this camera check was last
 	// run
-	void CameraManager::OnScaleChanged(float new_size, float last_known_size) 
-	{}
+	//void CameraManager::OnScaleChanged(float new_size, float last_known_size) 
+	//{}
 
 }}
