@@ -46,7 +46,7 @@ namespace Gts {
 		}
 	}
 
-	float CameraManager::GetfOverShoulderPosZ(RE::Character* a_this) {
+	float CameraManager::GetfOverShoulderPosZ() {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
@@ -57,7 +57,7 @@ namespace Gts {
 		}
 	}
 
-	float CameraManager::GetfOverShoulderPosX(RE::Character* a_this) {
+	float CameraManager::GetfOverShoulderPosX() {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
@@ -68,7 +68,7 @@ namespace Gts {
 		}
 	}
 
-	float CameraManager::GetfOverShoulderPosY(RE::Character* a_this) {
+	float CameraManager::GetfOverShoulderPosY() {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
