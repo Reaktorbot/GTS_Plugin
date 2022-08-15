@@ -81,7 +81,7 @@ namespace Gts {
 
 	void CameraManager::ApplyCameraSettings(float size, float X, float Y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne) {
 		float cameraYCorrection = 121.0;
-		float UpDown = 1.0; float size = 1.0;
+		float UpDown = 1.0; float Side = 1.0;
    		float CalcProne = runtime.CalcProne->value;
 
     CameraManager::SetfOverShoulderPosX(((X + Side) * size)); 
@@ -105,14 +105,14 @@ namespace Gts {
     {
         float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
         float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * ProneCalc); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * ProneCalcC); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }}
 
 	void CameraManager::ApplyFeetCameraSettings(float size, float X, float Y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne)) {
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
     	float CalcProne2 = runtime.CalcProne->value;
-		float UpDown = 1.0; float size = 1.0;
+		float UpDown = 1.0; float Side = 1.0;
     
     CameraManager::SetfOverShoulderPosX(((X + Side) * size)); 
     CameraManager::SetfOverShoulderPosZ(((Y + UpDown) * size) - cameraYCorrection2);
@@ -129,8 +129,8 @@ namespace Gts {
     {
         float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
         float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * ProneCalc); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * ProneCalcC); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }
 }
 
