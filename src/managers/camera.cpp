@@ -2,7 +2,7 @@
 #include "scale/scale.hpp"
 #include "util.hpp"
 #include "data/runtime.hpp"
-#include "data/persistent.h"
+#include "data/persistent.hpp"
 
 using namespace SKSE;
 using namespace RE;
@@ -84,17 +84,17 @@ namespace Gts {
 		auto player = PlayerCharacter::GetSingleton();
 		bool ImProne = false;
 		float current_size = get_visual_scale(player);
-		float ScaleMethod = 0.0
+		float ScaleMethod = 0.0;
 		SizeMethod method = Persistent::GetSingleton().size_method;
 
 		if (method == SizeMethod::ModelScale) {
-  			ScaleMethod = 0.0
+  			ScaleMethod = 0.0;
 		}
 		else if (method == SizeMethod::RootScale) {
-  			ScaleMethod = 1.0
+  			ScaleMethod = 1.0;
 		}
 		else if (method == SizeMethod::RefScale) {
-  			ScaleMethod = 2.0
+  			ScaleMethod = 2.0;
 		}
 
 		float EnableCamera = runtime.EnableCamera;
@@ -130,18 +130,18 @@ namespace Gts {
 
 
         if (ImCrouching >= 1.0){
-            ImProne = true
+            ImProne = true;
         }
         else {
-            ImProne = false
+            ImProne = false;
         }
 		if (EnableCamera < 1.0)
 		{return;}
 		else
 		if (MinDistance < -200)
-        	{MinDistance = -200}  
+        	{MinDistance = -200;}  
     	if (MaxDistance < 50)
-       	    {MaxDistance = 50}
+       	    {MaxDistance = 50;}
 
 
 		if (FeetCamera >= 1.0) // Adjustment for Feet Camera
@@ -149,27 +149,27 @@ namespace Gts {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
         //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
     if (player.isSneaking() == true && ImProne == true)
-        {ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne)}
+        {ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
         else
-         {ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne)}}
+         {ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
 
     else if (EnableAltCamera >= 1.0) // Adjustment for Alternate Camera 
     {
         //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision)
        // Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2)
         if (player.isSneaking() == true && ImProne == true)
-              {ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne)}
+              {ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}
           else
-             {ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne)}}          
+             {ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}          
 
    else if (EnableCamera >= 1.0) // Regular Camera
    {
     //Utility.setINIFloat("fMouseWheelZoomIncrement:Camera", CameraZoomPrecision);
     //Utility.setINIFloat("fMouseWheelZoomSpeed:Camera", CameraZoomSpeed/2);
         if (player.isSneaking() == true && ImProne == true)
-            {ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne)}
+            {ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);}
         else
-            {ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne)}}
+            {ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);}}
 
     }	
 
@@ -193,7 +193,7 @@ namespace {
 	using namespace Gts;
 
 	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
-	{float cameraYCorrection = 121.0
+	{float cameraYCorrection = 121.0;
 	float Size = 1.0; float UpDown = 1.0;
     const CalcProne = runtime.CalcProne;
 
@@ -216,10 +216,10 @@ namespace {
 
     if (PlayerCharacter::GetSingleton().isSneaking() == true && ImProne == true)
     {
-        float ProneCalc = CameraManager::GetfOverShoulderPosZ() //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
-        float ProneCalcC = CameraManager::GetfOverShoulderPosZ() //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2) //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2) //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+        float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
+        float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }}
 
 	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
@@ -241,10 +241,10 @@ namespace {
 
     if (PlayerCharacter::GetSingleton().isSneaking() == true && ImProne == true)
     {
-        float ProneCalc = CameraManager::GetfOverShoulderPosZ() //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
-        float ProneCalcC = CameraManager::GetfOverShoulderPosZ() //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2) //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2) //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+        float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera") 
+        float ProneCalcC = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+        CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }
 
 	}
