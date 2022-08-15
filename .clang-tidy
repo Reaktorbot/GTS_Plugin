@@ -1,5 +1,5 @@
 ---
-Checks:          'clang-analyzer-*,readability-*'
+Checks:          'clang-analyzer-*,readability-identifier-naming'
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
