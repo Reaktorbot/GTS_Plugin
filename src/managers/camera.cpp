@@ -48,35 +48,26 @@ namespace Gts {
 
 	float CameraManager::GetfOverShoulderPosZ() {
 		auto camera = PlayerCamera::GetSingleton();
-		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state) {
+			
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				return third_person_state->posOffsetExpected.z;
-			}
-		}
 	}
 
 	float CameraManager::GetfOverShoulderPosX() {
 		auto camera = PlayerCamera::GetSingleton();
-		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				return third_person_state->posOffsetExpected.x;
-			}
-		}
 	}
 
 	float CameraManager::GetfOverShoulderPosY() {
 		auto camera = PlayerCamera::GetSingleton();
-		if (camera) {
 			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				return third_person_state->posOffsetExpected.y;
-			}
-		}
+			
+		
 	}
 
 	void CameraManager::ApplyCameraSettings(float size, float X, float Y, float AltX, float AltY, float MinDistance, float MaxDistance, float usingAutoDistance, bool ImProne) {
