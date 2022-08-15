@@ -232,9 +232,9 @@ namespace Gts {
     }	
 
 
-		if (fabs(current_size - this->last_scale) > 1e-4) {
-			this->OnScaleChanged(current_size, this->last_scale);
-			this->last_scale = current_size;
+		if (fabs(size - this->last_scale) > 1e-4) {
+			this->OnScaleChanged(size, this->last_scale);
+			this->last_scale = size;
 		}
 	
 
