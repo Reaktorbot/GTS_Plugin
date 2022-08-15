@@ -82,6 +82,7 @@ namespace Gts {
 	// Run every frame
 	void CameraManager::Update() {
 		auto player = PlayerCharacter::GetSingleton();
+		auto& runtime = Runtime::GetSingleton();
 		bool ImProne = false;
 		float current_size = get_visual_scale(player);
 		float ScaleMethod = 0.0;
