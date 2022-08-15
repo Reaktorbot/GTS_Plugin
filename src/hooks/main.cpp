@@ -2,6 +2,7 @@
 #include "util.hpp"
 
 #include "managers/GtsManager.hpp"
+#include "managers/camera.hpp"
 #include "magic/magic.hpp"
 
 using namespace RE;
@@ -22,9 +23,11 @@ namespace Hooks
 		_Update(a_this, a2);
 		auto& manager = GtsManager::GetSingleton();
 		auto& magic = MagicManager::GetSingleton();
+		auto& camera = CameraManager::GetSingleton();
 		activate_mainthread_mode();
 		manager.poll();
 		magic.poll();
+		camera.Update();
 		deactivate_mainthread_mode();
 	}
 }

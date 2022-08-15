@@ -10,5 +10,14 @@ namespace Gts {
 	class CameraManager {
 		public:
 			[[nodiscard]] static CameraManager& GetSingleton() noexcept;
+
+			void SetfOverShoulderPosX(float value);
+
+			void Update();
+
+			void OnScaleChanged(float new, float old);
+
+		private:
+			float last_scale = -1.0;
 	};
 }
