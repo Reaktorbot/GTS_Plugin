@@ -187,11 +187,9 @@ namespace Gts {
 	void CameraManager::OnScaleChanged(float new_size, float last_known_size) {
 	}
 
-}
 
 
-namespace {
-	using namespace Gts;
+
 
 	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
 	{float cameraYCorrection = 121.0;
@@ -248,5 +246,5 @@ namespace {
         CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne2); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
     }
 
-	}
-}
+	
+}}
