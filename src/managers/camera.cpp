@@ -97,36 +97,36 @@ namespace Gts {
   			ScaleMethod = 2.0;
 		}
 
-		float EnableCamera = runtime.EnableCamera;
-		float EnableAltCamera = runtime.EnableAltCamera;
-    	float FeetCamera = runtime.FeetCamera;
-    	float usingAutoDistance = runtime.usingAutoDistance;
-    	float ImCrouching = runtime.ImCrouching;
-		float MinDistance = runtime.MinDistance;
-   		float MaxDistance = runtime.MaxDistance;
-   	 	float CameraZoomSpeed = runtime.CameraZoomSpeed;
-    	float CameraZoomPrecision = runtime.CameraZoomPrecision;
+		float EnableCamera = runtime.EnableCamera->value;
+		float EnableAltCamera = runtime.EnableAltCamera->value;
+    	float FeetCamera = runtime.FeetCamera->value;
+    	float usingAutoDistance = runtime.usingAutoDistance->value;
+    	float ImCrouching = runtime.ImCrouching->value;
+		float MinDistance = runtime.MinDistance->value;
+   		float MaxDistance = runtime.MaxDistance->value;
+   	 	float CameraZoomSpeed = runtime.CameraZoomSpeed->value;
+    	float CameraZoomPrecision = runtime.CameraZoomPrecision->value;
     //////////Normal - Prone
-    	float proneCameraX = runtime.proneCameraX;
-    	float proneCameraY = runtime.proneCameraY;
-    	float proneCombatCameraX = runtime.proneCombatCameraX;
-    	float proneCombatCameraY = runtime.proneCombatCameraY;
+    	float proneCameraX = runtime.proneCameraX->value;
+    	float proneCameraY = runtime.proneCameraY->value;
+    	float proneCombatCameraX = runtime.proneCombatCameraX->value;
+    	float proneCombatCameraY = runtime.proneCombatCameraY->value;
     /////////Normal - Normal
- 	    float cameraX = runtime.cameraX;
-   	 	float cameraY = runtime.cameraY;
-   	 	float combatCameraX = runtime.combatCameraX;
-   	 	float combatCameraY = runtime.combatCameraY;
+ 	    float cameraX = runtime.cameraX->value;
+   	 	float cameraY = runtime.cameraY->value;
+   	 	float combatCameraX = runtime.combatCameraX->value;
+   	 	float combatCameraY = runtime.combatCameraY->value;
 //------------------------------------------------------------------------------------------------------------------------
     /////////Alternate - Prone
-    	float proneCameraAlternateX = runtime.proneCameraAlternateX;
-    	float proneCameraAlternateY = runtime.proneCameraAlternateY;
-    	float proneCombatCameraAlternateX = runtime.proneCombatCameraAlternateX;
-    	float proneCombatCameraAlternateY = runtime.proneCameraAlternateY;
+    	float proneCameraAlternateX = runtime.proneCameraAlternateX->value;
+    	float proneCameraAlternateY = runtime.proneCameraAlternateY->value;
+    	float proneCombatCameraAlternateX = runtime.proneCombatCameraAlternateX->value;
+    	float proneCombatCameraAlternateY = runtime.proneCameraAlternateY->value;
     ////////Alternate - Normal
-    	float cameraAlternateX = runtime.cameraAlternateX;
-    	float cameraAlternateY = runtime.cameraAlternateY;
-    	float combatCameraAlternateX = runtime.combatCameraAlternateX;
-    	float combatCameraAlternateY = runtime.combatCameraAlternateY;
+    	float cameraAlternateX = runtime.cameraAlternateX->value;
+    	float cameraAlternateY = runtime.cameraAlternateY->value;
+    	float combatCameraAlternateX = runtime.combatCameraAlternateX->value;
+    	float combatCameraAlternateY = runtime.combatCameraAlternateY->value;
 
 
         if (ImCrouching >= 1.0){
@@ -195,7 +195,7 @@ namespace {
 	void CameraManager::ApplyCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
 	{float cameraYCorrection = 121.0;
 	float Size = 1.0; float UpDown = 1.0;
-    const CalcProne = runtime.CalcProne;
+    const CalcProne = runtime.CalcProne->value;
 
     CameraManager::SetfOverShoulderPosX(((X + Side) * size)); 
     CameraManager::SetfOverShoulderPosZ(((Y + UpDown) * size) - cameraYCorrection);
@@ -225,7 +225,7 @@ namespace {
 	void CameraManager::ApplyFeetCameraSettings(size: float, X: float, Y: float, AltX: float, AltY: float, MinDistance: float, MaxDistance: float, usingAutoDistance:float, ImProne: bool)
 	{
 		float cameraYCorrection2 = 205.0 * (size * 0.33) + 70;
-    	float CalcProne2 = runtime.CalcProne;
+    	float CalcProne2 = runtime.CalcProne->value;
 		float Size = 1.0; float UpDown = 1.0;
     
     CameraManager::SetfOverShoulderPosX(((X + Side) * size)); 
