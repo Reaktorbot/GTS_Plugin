@@ -137,8 +137,8 @@ namespace Gts {
 		if (PlayerCharacter::GetSingleton()->IsSneaking() == true && ImProne == true) {
 			float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera")
 			float ProneCalcC = CameraManager::GetfOverShoulderCombatPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-			CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-			CameraManager::SetfOverShoulderCombatPosZ(ProneCalcC * CalcProne); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+			CameraManager::SetfOverShoulderPosZ(ProneCalc * runtime.CalcProne->value); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+			CameraManager::SetfOverShoulderCombatPosZ(ProneCalcC * runtime.CalcProne->value); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
 		}
 	}
 
@@ -161,8 +161,8 @@ namespace Gts {
 		if (PlayerCharacter::GetSingleton()->IsSneaking() == true && ImProne == true) {
 			float ProneCalc = CameraManager::GetfOverShoulderPosZ(); //Utility.getINIFloat("fOverShoulderPosZ:Camera")
 			float ProneCalcC = CameraManager::GetfOverShoulderCombatPosZ(); //Utility.getINIFloat("fOverShoulderCombatPosZ:Camera")
-			CameraManager::SetfOverShoulderPosZ(ProneCalc * CalcProne); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
-			CameraManager::SetfOverShoulderCombatPosZ(ProneCalcC * CalcProne); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
+			CameraManager::SetfOverShoulderPosZ(ProneCalc * runtime.CalcProne->value); //Utility.setINIFloat("fOverShoulderPosZ:Camera", ProneCalc * CalcProne2)
+			CameraManager::SetfOverShoulderCombatPosZ(ProneCalcC * runtime.CalcProne->value); //Utility.setINIFloat("fOverShoulderCombatPosZ:Camera", ProneCalcC * CalcProne2)
 		}
 	}
 
