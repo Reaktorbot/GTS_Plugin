@@ -14,7 +14,7 @@ namespace {
 		auto ini_conf = INIPrefSettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
-			setting.data.f = value; // If float
+			setting->data.f = value; // If float
 			ini_conf->WriteSetting(setting);
 		}
 	}
@@ -116,14 +116,14 @@ namespace Gts {
 		SetfOverShoulderPosX((X + Side) * size);
 		SetfOverShoulderPosZ((Y + UpDown) * size - cameraYCorrection);
 
-		SetOverShoulderCombatPosX((AltX + Side) * size);
+		SetfOverShoulderCombatPosX((AltX + Side) * size);
 		SetfOverShoulderCombatPosZ(((Y + UpDown) * size) - cameraYCorrection);
 
 		SetfOverShoulderPosX(((X + Side) * size));
 		SetfOverShoulderPosZ(((Y + UpDown) * size) - cameraYCorrection);
 
 		SetfOverShoulderCombatPosX((AltX + Side) * size);
-		SetfOverShoulderCombatPosZ((AltY + UpDown) * size - cameraYCorrection2);
+		SetfOverShoulderCombatPosZ((AltY + UpDown) * size - cameraYCorrection);
 		if (usingAutoDistance <= 0.0) {
 			SetfVanityModeMinDist(MinDistance * size);
 			SetfVanityModeMaxDist(MaxDistance * size);
@@ -226,16 +226,16 @@ namespace Gts {
 
 
 		if (FeetCamera >= 1.0) { // Adjustment for Feet Camera
-			SetfMouseWheelZoomIncrement(CameraZoomPrecision)
-			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2)
+			SetfMouseWheelZoomIncrement(CameraZoomPrecision);
+			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2);
 			if (player->IsSneaking() == true && ImProne == true) {
 				CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			} else {
 				CameraManager::ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			}
 		} else if (EnableAltCamera >= 1.0) { // Adjustment for Alternate Camera
-			SetfMouseWheelZoomIncrement(CameraZoomPrecision)
-			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2)
+			SetfMouseWheelZoomIncrement(CameraZoomPrecision);
+			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2);
 			if (player->IsSneaking() == true && ImProne == true) {
 				CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			} else {
