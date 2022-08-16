@@ -14,7 +14,7 @@ namespace {
 		auto ini_conf = INIPrefSettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
-			setting->data.f = value; // If float
+			setting->data.f=value; // If float
 			ini_conf->WriteSetting(setting);
 		}
 	}
@@ -101,6 +101,11 @@ namespace Gts {
 	void CameraManager::SetfMouseWheelZoomSpeed(float value) {
 		SetINIFloat("fMouseWheelZoomSpeed:Camera", value);
 	}
+
+	void CameraManager::SetfMouseWheelZoomIncrement(float value) {
+		SetINIFloat("fMouseWheelZoomIncrement:Camera", value);
+	}
+
 	float CameraManager::GetfMouseWheelZoomSpeed() {
 		return GetINIFloat("fMouseWheelZoomSpeed:Camera");
 	}
