@@ -14,7 +14,7 @@ namespace {
 		auto ini_conf = INIPrefSettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
-			setting.data.f -> value; // If float
+			setting->data.f = value; // If float
 			ini_conf->WriteSetting(setting);
 		}
 	}
@@ -22,7 +22,7 @@ namespace {
 		auto ini_conf = INIPrefSettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
-			return setting.data.f;
+			return setting->data.f;
 		}
 		return -1.0;
 	}
