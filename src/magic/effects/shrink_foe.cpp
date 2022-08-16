@@ -22,13 +22,9 @@ namespace Gts {
 		}
 	}
 
-	bool ShrinkFoe::StartEffect(EffectSetting* effect) {
+	static bool ShrinkFoe::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
-		if (effect == runtime.ShrinkEnemy || effect == runtime.ShrinkEnemyAOE || effect == runtime.ShrinkEnemyAOEMast) {
-			return true;
-		} else {
-			return false;
-		}
+		return effect == runtime.ShrinkEnemy || effect == runtime.ShrinkEnemyAOE || effect == runtime.ShrinkEnemyAOEMast;
 	}
 
 	void ShrinkFoe::OnUpdate() {
@@ -42,7 +38,7 @@ namespace Gts {
 			return;
 		}
 		
-		bool smallMassiveThreat = caster->HasMagicEffect(Runtime::GetSingleton().smallMassiveThreat);
+		bool small_massive_threat = caster->HasMagicEffect(Runtime::GetSingleton().smallMassiveThreat);
 		
 		transfer_size(caster, target, IsDualCasting(), this->power, this->efficiency, smallMassiveThreat);
 	}

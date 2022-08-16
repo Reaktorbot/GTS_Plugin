@@ -5,5 +5,5 @@
 using namespace RE;
 
 namespace Gts {
-	void apply_highheel(Actor* actor, TempActorData* temp_data, bool force = false);
+	void ApplyHighheel(Actor* actor, TempActorData* temp_data, bool force = false);
 }

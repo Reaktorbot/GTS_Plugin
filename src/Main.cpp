@@ -57,7 +57,7 @@ namespace {
 		log->flush_on(spdlog::level::level_enum::trace);
 		log->set_pattern("[%Y-%m-%d %H:%M:%S.%e] [%n] [%l] [%t] [%s:%#] %v");
 		log->info("Logging started");
-		const auto& debugConfig = Gts::Config::GetSingleton().GetDebug();
+		const auto& debug_config = Gts::Config::GetSingleton().GetDebug();
 
 		log->set_level(debugConfig.GetLogLevel());
 		log->flush_on(debugConfig.GetFlushLevel());
@@ -182,5 +182,5 @@ SKSEPluginLoad(const LoadInterface * skse)
 	InitializeSerialization();
 
 	log::info("{} has finished loading.", plugin->GetName());
-	return(true);
+	returnstatic_cast<int>(true);
 }

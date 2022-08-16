@@ -8,7 +8,7 @@ using namespace RE;
 
 namespace Gts {
 	template <class T>
-	T* find_form(std::string_view lookup_id) {
+	T* FindForm(std::string_view lookup_id) {
 		// From https://github.com/Exit-9B/MCM-Helper/blob/a39b292909923a75dbe79dc02eeda161763b312e/src/FormUtil.cpp
 		std::string lookup_id_str(lookup_id);
 		std::istringstream ss{ lookup_id_str };
@@ -16,9 +16,9 @@ namespace Gts {
 
 		std::getline(ss, plugin, '|');
 		std::getline(ss, id);
-		RE::FormID relativeID;
+		RE::FormID relative_id;
 		std::istringstream{ id } >> std::hex >> relativeID;
-		const auto dataHandler = RE::TESDataHandler::GetSingleton();
+		const auto data_handler = RE::TESDataHandler::GetSingleton();
 		return dataHandler ? dataHandler->LookupForm<T>(relativeID, plugin) : nullptr;
 	}
 
@@ -28,7 +28,7 @@ namespace Gts {
 			virtual void OnUpdate();
 			virtual void OnFinish();
 
-			void poll();
+			void Poll();
 
 			Actor* GetTarget();
 			Actor* GetCaster();
@@ -38,14 +38,14 @@ namespace Gts {
 
 			void Dispel();
 			bool IsDualCasting();
-			inline bool DualCasted() {
-				return this->dual_casted;
+			inline bool DualCasted() const {
+				return this->_dual_casted;
 			}
 
 			Magic(ActiveEffect* effect);
 
 			inline bool IsFinished() {
-				return this->state == State::CleanUp;
+				return this->_state == State::CleanUp;
 			}
 
 		private:
@@ -56,12 +56,12 @@ namespace Gts {
 				Finish,
 				CleanUp,
 			};
-			State state = State::Init;
-			Actor* target = nullptr;
-			Actor* caster = nullptr;
-			ActiveEffect* activeEffect = nullptr;
-			EffectSetting* effectSetting = nullptr;
-			bool dual_casted = false;
+			State _state = State::Init;
+			Actor* _target = nullptr;
+			Actor* _caster = nullptr;
+			ActiveEffect* _activeEffect = nullptr;
+			EffectSetting* _effectSetting = nullptr;
+			bool _dual_casted = false;
 	};
 
 	class MagicManager {

@@ -11,7 +11,7 @@ namespace Hooks
 {
 	void Hook_Character::Hook() {
 		logger::info("Hooking Character");
-		REL::Relocation<std::uintptr_t> ActorVtbl{ RE::VTABLE_Character[0] };
+		REL::Relocation<std::uintptr_t> actor_vtbl{ RE::VTABLE_Character[0] };
 
 		_Update = ActorVtbl.write_vfunc(REL::Relocate(0xAD, 0x0AD, 0x0AF), Update);
 
@@ -29,7 +29,7 @@ namespace Hooks
 	// So this is an alternative hack
 	// It works by either adding more animation or undoing animations
 	// to that which skyrim does naturally
-	void Hook_Character::Update(RE::Character* a_this, float a_delta) {
+	static void Hook_Character::Update(RE::Character* a_this, float a_delta) {
 		_Update(a_this, a_delta);
 		float current_delta = *g_delta_time;
 		if (current_delta> 1e-5) {
@@ -48,27 +48,27 @@ namespace Hooks
 		}
 	}
 
-	float Hook_Character::GetRunSpeed(RE::Character* a_this) {
+	static float Hook_Character::GetRunSpeed(RE::Character* a_this) {
 		float value = _GetRunSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Character::GetJogSpeed(RE::Character* a_this) {
+	static float Hook_Character::GetJogSpeed(RE::Character* a_this) {
 		float value = _GetJogSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Character::GetFastWalkSpeed(RE::Character* a_this) {
+	static float Hook_Character::GetFastWalkSpeed(RE::Character* a_this) {
 		float value = _GetFastWalkSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Character::GetWalkSpeed(RE::Character* a_this) {
+	static float Hook_Character::GetWalkSpeed(RE::Character* a_this) {
 		float value = _GetWalkSpeed(a_this);
 		return value;
 	}
 
-	void Hook_Character::ProcessTracking(RE::Character* a_this, float a_delta, NiAVObject* a_obj3D) {
+	void Hook_Character::ProcessTracking(RE::Character* a_this, float a_delta, NiAVObject* a_obj3_d) {
 		_ProcessTracking(a_this, a_delta, a_obj3D);
 	}
 }

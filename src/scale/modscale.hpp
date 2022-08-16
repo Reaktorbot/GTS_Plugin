@@ -13,12 +13,12 @@ namespace Gts {
 		RefScale = 2,
 	};
 
-	void set_ref_scale(Actor* actor, float target_scale);
-	bool set_model_scale(Actor* actor, float target_scale);
-	bool set_npcnode_scale(Actor* actor, float target_scale);
-	float get_npcnode_scale(Actor* actor);
-	float get_model_scale(Actor* actor);
-	float get_ref_scale(Actor* actor);
-	float get_scale(Actor* actor);
-	bool set_scale(Actor* actor, float scale);
+	void SetRefScale(Actor* actor, float target_scale);
+	bool SetModelScale(Actor* actor, float target_scale);
+	bool SetNpcnodeScale(Actor* actor, float target_scale);
+	float GetNpcnodeScale(Actor* actor);
+	float GetModelScale(Actor* actor);
+	float GetRefScale(Actor* actor);
+	float GetScale(Actor* actor);
+	bool SetScale(Actor* actor, float scale);
 }

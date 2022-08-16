@@ -14,17 +14,17 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serialize(ar) {
+			articuno_serialize(_ar) {
 				auto logLevel = spdlog::level::to_string_view(_logLevel);
-				auto flushLevel = spdlog::level::to_string_view(_flushLevel);
+				auto _flushLevel = spdlog::level::to_string_view(_flushLevel);
 				ar <=> articuno::kv(logLevel, "logLevel");
 				ar <=> articuno::kv(flushLevel, "flushLevel");
 			}
 
-			articuno_deserialize(ar) {
+			ArticunoDeserialize(ar /*unused*/) {
 				*this = Debug();
-				std::string logLevel;
-				std::string flushLevel;
+				std::string log_level;
+				std::string flush_level;
 				if (ar <=> articuno::kv(logLevel, "logLevel")) {
 					_logLevel = spdlog::level::from_str(logLevel);
 				}
@@ -33,8 +33,8 @@ namespace Gts {
 				}
 			}
 
-			spdlog::level::level_enum _logLevel{spdlog::level::level_enum::info};
-			spdlog::level::level_enum _flushLevel{spdlog::level::level_enum::trace};
+			spdlog::level::level_enum log_level{spdlog::level::level_enum::info};
+			spdlog::level::level_enum flush_level{spdlog::level::level_enum::trace};
 
 			friend class articuno::access;
 	};
@@ -50,15 +50,15 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serialize(ar) {
+			articuno_serialize(_ar) {
 				ar <=> articuno::kv(_initDelay, "initDelay");
 				ar <=> articuno::kv(_step, "step");
 			}
 
-			articuno_deserialize(ar) {
+			ArticunoDeserialize(ar /*unused*/) {
 				*this = Frame();
 				int step;
-				int initDelay;
+				int init_delay;
 				if (ar <=> articuno::kv(step, "step")) {
 					_step = step;
 				}
@@ -67,8 +67,8 @@ namespace Gts {
 				}
 			}
 
-			int _step = 0;
-			int _initDelay = 0;
+			int step = 0;
+			int init_delay = 0;
 
 			friend class articuno::access;
 	};
@@ -115,7 +115,7 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_lFootstepL, "lFootstepL");
 				ar <=> articuno::kv(_lFootstepR, "lFootstepR");
 
@@ -136,22 +136,22 @@ namespace Gts {
 
 			}
 
-			std::string _lFootstepL;
-			std::string _lFootstepR;
+			std::string l_footstep_l;
+			std::string l_footstep_r;
 
-			std::string _lJumpLand;
+			std::string l_jump_land;
 
-			std::string _xlFootstepL;
-			std::string _xlFootstepR;
+			std::string xl_footstep_l;
+			std::string xl_footstep_r;
 
-			std::string _xlRumbleL;
-			std::string _xlRumbleR;
+			std::string xl_rumble_l;
+			std::string xl_rumble_r;
 
-			std::string _xlSprintL;
-			std::string _xlSprintR;
+			std::string xl_sprint_l;
+			std::string xl_sprint_r;
 
-			std::string _xxlFootstepL;
-			std::string _xxlFootstepR;
+			std::string xxl_footstep_l;
+			std::string xxl_footstep_r;
 
 
 
@@ -165,11 +165,11 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_smallMassiveThreat, "smallMassiveThreat");
 			}
 
-			std::string _smallMassiveThreat;
+			std::string small_massive_threat;
 
 			friend class articuno::access;
 	};
@@ -181,11 +181,11 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_footstepExplosion, "footstepExplosion");
 			}
 
-			std::string _footstepExplosion;
+			std::string footstep_explosion;
 
 			friend class articuno::access;
 	};
@@ -197,11 +197,11 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_hhBonus, "hhBonus");
 			}
 
-			std::string _hhBonus;
+			std::string hh_bonus;
 
 			friend class articuno::access;
 	};
@@ -228,7 +228,7 @@ namespace Gts {
 			}
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_method, "method");
 				ar <=> articuno::kv(_halfScale, "halfScale");
 				ar <=> articuno::kv(_powerAtMin, "powerAtMin");
@@ -237,12 +237,12 @@ namespace Gts {
 				ar <=> articuno::kv(_minScale, "minScale");
 			}
 
-			std::string _method;
-			float _halfScale;
-			float _powerAtMin;
-			float _powerAtMax;
-			float _maxScale;
-			float _minScale;
+			std::string method;
+			float half_scale;
+			float power_at_min;
+			float power_at_max;
+			float max_scale;
+			float min_scale;
 
 			friend class articuno::access;
 	};
@@ -280,7 +280,7 @@ namespace Gts {
 			[[nodiscard]] static const Config& GetSingleton() noexcept;
 
 		private:
-			articuno_serde(ar) {
+			articuno_serde(_ar) {
 				ar <=> articuno::kv(_debug, "debug");
 				ar <=> articuno::kv(_frame, "frame");
 				ar <=> articuno::kv(_sound, "sound");
@@ -290,13 +290,13 @@ namespace Gts {
 				ar <=> articuno::kv(_tremor, "tremor");
 			}
 
-			Debug _debug;
-			Frame _frame;
-			Sound _sound;
-			SpellEffects _spellEffects;
-			Explosions _explosions;
-			Perks _perks;
-			Tremor _tremor;
+			Debug debug;
+			Frame frame;
+			Sound sound;
+			SpellEffects spell_effects;
+			Explosions explosions;
+			Perks perks;
+			Tremor tremor;
 
 			friend class articuno::access;
 	};

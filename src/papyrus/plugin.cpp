@@ -13,13 +13,13 @@ using namespace RE;
 using namespace RE::BSScript;
 
 namespace {
-	constexpr std::string_view PapyrusClass = "GtsPlugin";
-	float GetDistanceToCamera(StaticFunctionTag*, Actor* actor) {
+	constexpr std::string_view papyrus_class = "GtsPlugin";
+	float GetDistanceToCamera(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_distance_to_camera(actor);
 	}
 
-	bool SetGrowthHalfLife(StaticFunctionTag*, Actor* actor, float halflife) {
-		if (actor) {
+	bool SetGrowthHalfLife(StaticFunctionTag* /*unused*/, Actor* actor, float halflife) {
+		if (actor != nullptr) {
 			auto actor_data = Persistent::GetSingleton().GetData(actor);
 			if (actor_data) {
 				actor_data->half_life = halflife;
@@ -29,8 +29,8 @@ namespace {
 		return false;
 	}
 
-	float GetGrowthHalfLife(StaticFunctionTag*, Actor* actor) {
-		if (actor) {
+	float GetGrowthHalfLife(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor != nullptr) {
 			auto actor_data = Persistent::GetSingleton().GetData(actor);
 			if (actor_data) {
 				return actor_data->half_life;
@@ -39,8 +39,8 @@ namespace {
 		return 0.05;
 	}
 
-	bool SetAnimSpeed(StaticFunctionTag*, Actor* actor, float animspeed) {
-		if (actor) {
+	bool SetAnimSpeed(StaticFunctionTag* /*unused*/, Actor* actor, float animspeed) {
+		if (actor != nullptr) {
 			auto actor_data = Persistent::GetSingleton().GetData(actor);
 			if (actor_data) {
 				actor_data->anim_speed = animspeed;
@@ -51,7 +51,7 @@ namespace {
 	}
 
 	// From https://stackoverflow.com/questions/17211122/formatting-n-significant-digits-in-c-without-scientific-notation
-	std::string format(double f, int n)
+	std::string Format(double f, int n)
 	{
 		if (f == 0) {
 			return "0";
@@ -63,104 +63,105 @@ namespace {
 		return ss.str();
 	}
 
-	std::string SigFig(StaticFunctionTag*, float number, int sf) {
-		return format(number, sf);
+	std::string SigFig(StaticFunctionTag* /*unused*/, float number, int sf) {
+		return Format(number, sf);
 	}
 
-	bool GetIsHighHeelEnabled(StaticFunctionTag*) {
+	bool GetIsHighHeelEnabled(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().highheel_correction;
 	}
 
-	void SetIsHighHeelEnabled(StaticFunctionTag*, bool enabled) {
+	void SetIsHighHeelEnabled(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().highheel_correction = enabled;
 	}
 
-	bool GetIsSpeedAdjusted(StaticFunctionTag*) {
+	bool GetIsSpeedAdjusted(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().is_speed_adjusted;
 	}
 
-	void SetIsSpeedAdjusted(StaticFunctionTag*, bool enabled) {
+	void SetIsSpeedAdjusted(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().is_speed_adjusted = enabled;
 	}
 
-	void SetSpeedParameterK(StaticFunctionTag*, float k) {
+	void SetSpeedParameterK(StaticFunctionTag* /*unused*/, float k) {
 		Persistent::GetSingleton().speed_adjustment.k = k;
 	}
-	float GetSpeedParameterK(StaticFunctionTag*) {
+	float GetSpeedParameterK(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().speed_adjustment.k;
 	}
-	void SetSpeedParameterN(StaticFunctionTag*, float n) {
+	void SetSpeedParameterN(StaticFunctionTag* /*unused*/, float n) {
 		Persistent::GetSingleton().speed_adjustment.n = n;
 	}
-	float GetSpeedParameterN(StaticFunctionTag*) {
+	float GetSpeedParameterN(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().speed_adjustment.n;
 	}
-	void SetSpeedParameterS(StaticFunctionTag*, float s) {
+	void SetSpeedParameterS(StaticFunctionTag* /*unused*/, float s) {
 		Persistent::GetSingleton().speed_adjustment.s = s;
 	}
-	float GetSpeedParameterS(StaticFunctionTag*) {
+	float GetSpeedParameterS(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().speed_adjustment.s;
 	}
 
-	bool IsJumping(StaticFunctionTag*, Actor* actor) {
+	bool IsJumping(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return Gts::IsJumping(actor);
 	}
 
-	bool IsInAir(StaticFunctionTag*, Actor* actor) {
-		if (!actor) return false;
+	bool IsInAir(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor == nullptr) { return false;
+}
 		return actor->IsInMidair();
 	}
 
-	float GetTremorScale(StaticFunctionTag*) {
+	float GetTremorScale(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().tremor_scale;
 	}
 
-	void SetTremorScale(StaticFunctionTag*, float value) {
+	void SetTremorScale(StaticFunctionTag* /*unused*/, float value) {
 		Persistent::GetSingleton().tremor_scale = value;
 	}
 
-	float GetTremorScaleNPC(StaticFunctionTag*) {
+	float GetTremorScaleNPC(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().npc_tremor_scale;
 	}
 
-	void SetTremorScaleNPC(StaticFunctionTag*, float value) {
+	void SetTremorScaleNPC(StaticFunctionTag* /*unused*/, float value) {
 		Persistent::GetSingleton().npc_tremor_scale = value;
 	}
 
-	float GetExperimentFloat(StaticFunctionTag*) {
+	float GetExperimentFloat(StaticFunctionTag* /*unused*/) {
 		return GtsManager::GetSingleton().experiment;
 	}
 
-	void SetExperimentFloat(StaticFunctionTag*, float value) {
+	void SetExperimentFloat(StaticFunctionTag* /*unused*/, float value) {
 		GtsManager::GetSingleton().experiment = value;
 	}
 }
 
 namespace Gts {
-	bool register_papyrus_plugin(IVirtualMachine* vm) {
-		vm->RegisterFunction("GetDistanceToCamera", PapyrusClass, GetDistanceToCamera);
-		vm->RegisterFunction("SetGrowthHalfLife", PapyrusClass, SetGrowthHalfLife);
-		vm->RegisterFunction("GetGrowthHalfLife", PapyrusClass, GetGrowthHalfLife);
-		vm->RegisterFunction("SetAnimSpeed", PapyrusClass, SetAnimSpeed);
-		vm->RegisterFunction("SigFig", PapyrusClass, SigFig);
-		vm->RegisterFunction("GetIsHighHeelEnabled", PapyrusClass, GetIsHighHeelEnabled);
-		vm->RegisterFunction("SetIsHighHeelEnabled", PapyrusClass, SetIsHighHeelEnabled);
-		vm->RegisterFunction("GetIsSpeedAdjusted", PapyrusClass, GetIsSpeedAdjusted);
-		vm->RegisterFunction("SetIsSpeedAdjusted", PapyrusClass, SetIsSpeedAdjusted);
-		vm->RegisterFunction("SetSpeedParameterK", PapyrusClass, SetSpeedParameterK);
-		vm->RegisterFunction("GetSpeedParameterK", PapyrusClass, GetSpeedParameterK);
-		vm->RegisterFunction("SetSpeedParameterN", PapyrusClass, SetSpeedParameterN);
-		vm->RegisterFunction("GetSpeedParameterN", PapyrusClass, GetSpeedParameterN);
-		vm->RegisterFunction("SetSpeedParameterS", PapyrusClass, SetSpeedParameterS);
-		vm->RegisterFunction("GetSpeedParameterS", PapyrusClass, GetSpeedParameterS);
+	bool RegisterPapyrusPlugin(IVirtualMachine* vm) {
+		vm->RegisterFunction("GetDistanceToCamera", papyrus_class, GetDistanceToCamera);
+		vm->RegisterFunction("SetGrowthHalfLife", papyrus_class, SetGrowthHalfLife);
+		vm->RegisterFunction("GetGrowthHalfLife", papyrus_class, GetGrowthHalfLife);
+		vm->RegisterFunction("SetAnimSpeed", papyrus_class, SetAnimSpeed);
+		vm->RegisterFunction("SigFig", papyrus_class, SigFig);
+		vm->RegisterFunction("GetIsHighHeelEnabled", papyrus_class, GetIsHighHeelEnabled);
+		vm->RegisterFunction("SetIsHighHeelEnabled", papyrus_class, SetIsHighHeelEnabled);
+		vm->RegisterFunction("GetIsSpeedAdjusted", papyrus_class, GetIsSpeedAdjusted);
+		vm->RegisterFunction("SetIsSpeedAdjusted", papyrus_class, SetIsSpeedAdjusted);
+		vm->RegisterFunction("SetSpeedParameterK", papyrus_class, SetSpeedParameterK);
+		vm->RegisterFunction("GetSpeedParameterK", papyrus_class, GetSpeedParameterK);
+		vm->RegisterFunction("SetSpeedParameterN", papyrus_class, SetSpeedParameterN);
+		vm->RegisterFunction("GetSpeedParameterN", papyrus_class, GetSpeedParameterN);
+		vm->RegisterFunction("SetSpeedParameterS", papyrus_class, SetSpeedParameterS);
+		vm->RegisterFunction("GetSpeedParameterS", papyrus_class, GetSpeedParameterS);
 		vm->RegisterFunction("IsJumping", PapyrusClass, IsJumping);
-		vm->RegisterFunction("IsInAir", PapyrusClass, IsInAir);
-		vm->RegisterFunction("GetTremorScale", PapyrusClass, GetTremorScale);
-		vm->RegisterFunction("SetTremorScale", PapyrusClass, SetTremorScale);
-		vm->RegisterFunction("GetTremorScaleNPC", PapyrusClass, GetTremorScaleNPC);
-		vm->RegisterFunction("SetTremorScaleNPC", PapyrusClass, SetTremorScaleNPC);
-		vm->RegisterFunction("GetExperimentFloat", PapyrusClass, GetExperimentFloat);
-		vm->RegisterFunction("SetExperimentFloat", PapyrusClass, SetExperimentFloat);
+		vm->RegisterFunction("IsInAir", papyrus_class, IsInAir);
+		vm->RegisterFunction("GetTremorScale", papyrus_class, GetTremorScale);
+		vm->RegisterFunction("SetTremorScale", papyrus_class, SetTremorScale);
+		vm->RegisterFunction("GetTremorScaleNPC", papyrus_class, GetTremorScaleNPC);
+		vm->RegisterFunction("SetTremorScaleNPC", papyrus_class, SetTremorScaleNPC);
+		vm->RegisterFunction("GetExperimentFloat", papyrus_class, GetExperimentFloat);
+		vm->RegisterFunction("SetExperimentFloat", papyrus_class, SetExperimentFloat);
 
 		return true;
 	}

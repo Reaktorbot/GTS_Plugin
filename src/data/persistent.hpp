@@ -51,7 +51,7 @@ namespace Gts {
 				.o = 1.0,
 				.a = 0.0,
 			};
-			SoftPotential MS_adjustment {
+			SoftPotential ms_adjustment {
 				.k = 0.132,
 				.n = 0.85,
 				.s = 1.12,

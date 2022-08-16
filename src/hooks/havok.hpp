@@ -7,7 +7,7 @@ using namespace SKSE;
 namespace Hooks
 {
 
-	class Hook_Havok
+	class HookHavok
 	{
 		public:
 			static void Hook(Trampoline& trampoline);
@@ -20,25 +20,25 @@ namespace Hooks
 				Ignore,    // Force the two objects to not collide
 			};
 
-			static CollisionFilterComparisonResult CompareFilterInfo(bhkCollisionFilter* a_collisionFilter, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
+			static CollisionFilterComparisonResult CompareFilterInfo(bhkCollisionFilter* a_collision_filter, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
 
 			static void ProcessHavokHitJobs(void* a1);
-			static inline REL::Relocation<decltype(ProcessHavokHitJobs)> _ProcessHavokHitJobs;
+			static inline REL::Relocation<decltype(ProcessHavokHitJobs)> process_havok_hit_jobs;
 
-			static bool bhkCollisionFilter_CompareFilterInfo1(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo2(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo3(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo4(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo5(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo6(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static bool bhkCollisionFilter_CompareFilterInfo7(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB);
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo1)> _bhkCollisionFilter_CompareFilterInfo1;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo2)> _bhkCollisionFilter_CompareFilterInfo2;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo3)> _bhkCollisionFilter_CompareFilterInfo3;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo4)> _bhkCollisionFilter_CompareFilterInfo4;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo5)> _bhkCollisionFilter_CompareFilterInfo5;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo6)> _bhkCollisionFilter_CompareFilterInfo6;
-			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo7)> _bhkCollisionFilter_CompareFilterInfo7;
+			static bool BhkCollisionFilterCompareFilterInfo1(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo2(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo3(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo4(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo5(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo6(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static bool BhkCollisionFilterCompareFilterInfo7(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b);
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo1)> bhk_collision_filter_compare_filter_info1;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo2)> bhk_collision_filter_compare_filter_info2;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo3)> bhk_collision_filter_compare_filter_info3;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo4)> bhk_collision_filter_compare_filter_info4;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo5)> bhk_collision_filter_compare_filter_info5;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo6)> bhk_collision_filter_compare_filter_info6;
+			static inline REL::Relocation<decltype(bhkCollisionFilter_CompareFilterInfo7)> bhk_collision_filter_compare_filter_info7;
 
 	};
 }

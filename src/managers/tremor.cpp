@@ -19,7 +19,7 @@ namespace {
 		Unknown,
 	};
 
-	float falloff_calc(float x, float half_power) {
+	float FalloffCalc(float x, float half_power) {
 		float n_falloff = 2.0;
 		return 1/(1+pow(pow(1/0.5-1,n_falloff)*(x)/half_power,half_power));
 	}
@@ -32,7 +32,8 @@ namespace Gts {
 	}
 
 	void TremorManager::OnImpact(const Impact& impact) {
-		if (!impact.actor) return;
+		if (!impact.actor) { return;
+}
 		auto actor = impact.actor;
 
 		float tremor_scale;

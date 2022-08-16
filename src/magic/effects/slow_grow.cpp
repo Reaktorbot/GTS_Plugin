@@ -5,7 +5,7 @@
 #include "data/runtime.hpp"
 
 namespace Gts {
-	bool SlowGrow::StartEffect(EffectSetting* effect) {
+	static bool SlowGrow::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return effect == runtime.SlowGrowth;
 	}
@@ -21,11 +21,11 @@ namespace Gts {
 		}
 
 		auto& runtime = Runtime::GetSingleton();
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float casterScale = get_visual_scale(caster);
-		float DualCast = 1.0;
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float caster_scale = get_visual_scale(caster);
+		float dual_cast = 1.0;
 		if (IsDualCasting()) {
-			DualCast = 2.0;
+			dual_cast = 2.0;
 		}
 		mod_target_scale(caster, 0.0010 * ProgressionMultiplier);
 	}

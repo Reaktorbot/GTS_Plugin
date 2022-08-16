@@ -16,7 +16,7 @@ namespace Gts {
 
 			ShrinkFoe(ActiveEffect* effect);
 		private:
-			float power = 0.0;
-			float efficiency = 0.0;
+			float _power = 0.0;
+			float _efficiency = 0.0;
 	};
 }

@@ -10,12 +10,12 @@ using namespace RE::BSScript::Internal;
 
 namespace Hooks
 {
-	class Hook_VM
+	class HookVm
 	{
 		public:
 			static void Hook();
 		private:
-			static void SendEvent(VirtualMachine* a_this, VMHandle a_handle, const BSFixedString& a_eventName, IFunctionArguments* a_args);
-			static inline REL::Relocation<decltype(SendEvent)> _SendEvent;
+			static void SendEvent(VirtualMachine* a_this, VMHandle a_handle, const BSFixedString& a_event_name, IFunctionArguments* a_args);
+			static inline REL::Relocation<decltype(SendEvent)> send_event;
 	};
 }

@@ -6,7 +6,7 @@
 
 namespace Gts {
 
-	bool SizeDamage::StartEffect(EffectSetting* effect) {
+	static bool SizeDamage::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return (effect == runtime.SizeRelatedDamage0 || effect == runtime.SizeRelatedDamage1 || effect == runtime.SizeRelatedDamage2);
 	}
@@ -22,11 +22,11 @@ namespace Gts {
 		}
 		auto& runtime = Runtime::GetSingleton();
 		float size_limit = runtime.sizeLimit->value;
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float casterScale = get_visual_scale(caster);
-		float targetScale = get_visual_scale(target);
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float caster_scale = get_visual_scale(caster);
+		float target_scale = get_visual_scale(target);
 
-		float SizeDifference = casterScale/targetScale;
+		float size_difference = caster_scale/target_scale;
 		if (target->IsPlayerTeammate() == true && runtime.GtsNPCEffectImmunityToggle->value == 1.0
 		    || target->HasMagicEffect(runtime.FakeCrushEffect) == true
 		    || target->Is3DLoaded() == false) {

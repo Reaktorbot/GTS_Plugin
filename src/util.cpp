@@ -4,25 +4,25 @@ using namespace Gts;
 
 namespace {
 	// Spring code from https://theorangeduck.com/page/spring-roll-call
-	float halflife_to_damping(float halflife, float eps = 1e-5f)
+	float HalflifeToDamping(float halflife, float eps = 1e-5F)
 	{
-		return (4.0f * 0.69314718056f) / (halflife + eps);
+		return (4.0F * 0.69314718056F) / (halflife + eps);
 	}
 
-	float damping_to_halflife(float damping, float eps = 1e-5f)
+	float DampingToHalflife(float damping, float eps = 1e-5F)
 	{
-		return (4.0f * 0.69314718056f) / (damping + eps);
+		return (4.0F * 0.69314718056F) / (damping + eps);
 	}
-	float fast_negexp(float x)
+	float FastNegexp(float x)
 	{
-		return 1.0f / (1.0f + x + 0.48f*x*x + 0.235f*x*x*x);
+		return 1.0F / (1.0F + x + 0.48F*x*x + 0.235F*x*x*x);
 	}
 }
 namespace Gts {
 	/**
 	 * Find actors in ai manager that are loaded
 	 */
-	vector<Actor*> find_actors() {
+	vector<Actor*> FindActors() {
 		vector<Actor*> result;
 
 		auto high_actors = find_actors_high();
@@ -40,7 +40,7 @@ namespace Gts {
 		return result;
 	}
 
-	vector<Actor*> find_actors_high() {
+	vector<Actor*> FindActorsHigh() {
 		vector<Actor*> result;
 
 		auto process_list = ProcessLists::GetSingleton();
@@ -67,7 +67,7 @@ namespace Gts {
 		return result;
 	}
 
-	vector<Actor*> find_actors_middle_high() {
+	vector<Actor*> FindActorsMiddleHigh() {
 		vector<Actor*> result;
 
 		auto process_list = ProcessLists::GetSingleton();
@@ -90,7 +90,7 @@ namespace Gts {
 		return result;
 	}
 
-	vector<Actor*> find_actors_middle_low() {
+	vector<Actor*> FindActorsMiddleLow() {
 		vector<Actor*> result;
 
 		auto process_list = ProcessLists::GetSingleton();
@@ -113,7 +113,7 @@ namespace Gts {
 		return result;
 	}
 
-	vector<Actor*> find_actors_low() {
+	vector<Actor*> FindActorsLow() {
 		vector<Actor*> result;
 
 		auto process_list = ProcessLists::GetSingleton();
@@ -160,10 +160,10 @@ namespace Gts {
 		return meter * 70.0;
 	}
 
-	NiPoint3 unit_to_meter(const NiPoint3& unit) {
+	NiPoint3 UnitToMeter(const NiPoint3& unit) {
 		return unit / 70.0;
 	}
-	NiPoint3 meter_to_unit(const NiPoint3& meter) {
+	NiPoint3 MeterToUnit(const NiPoint3& meter) {
 		return meter * 70.0;
 	}
 
@@ -174,10 +174,10 @@ namespace Gts {
 		float halflife,
 		float dt)
 	{
-		float y = halflife_to_damping(halflife) / 2.0f;
+		float y = HalflifeToDamping(halflife) / 2.0F;
 		float j0 = x - x_goal;
 		float j1 = v + j0*y;
-		float eydt = fast_negexp(y*dt);
+		float eydt = FastNegexp(y*dt);
 
 		x = eydt*(j0 + j1*dt) + x_goal;
 		v = eydt*(v - j1*y*dt);

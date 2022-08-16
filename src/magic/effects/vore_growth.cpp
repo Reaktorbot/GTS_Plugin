@@ -5,7 +5,7 @@
 #include "data/runtime.hpp"
 
 namespace Gts {
-	bool VoreGrowth::StartEffect(EffectSetting* effect) {
+	static bool VoreGrowth::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return effect == runtime.GlobalVoreGrowth;
 	}
@@ -21,8 +21,8 @@ namespace Gts {
 		}
 
 		auto& runtime = Runtime::GetSingleton();
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float casterScale = get_visual_scale(caster);
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float caster_scale = get_visual_scale(caster);
 		mod_target_scale(caster, 0.00165 * 0.15 * ProgressionMultiplier);
 	}
 }

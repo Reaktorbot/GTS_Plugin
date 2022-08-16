@@ -14,7 +14,7 @@ namespace Gts {
 		return instance;
 	}
 
-	TempActorData* Transient::GetData(TESObjectREFR* object) {
+	static TempActorData* Transient::GetData(TESObjectREFR* object) {
 		if (!object) {
 			return nullptr;
 		}
@@ -28,7 +28,7 @@ namespace Gts {
 		return result;
 	}
 
-	TempActorData* Transient::GetActorData(Actor* actor) {
+	static TempActorData* Transient::GetActorData(Actor* actor) {
 		std::unique_lock lock(this->_lock);
 		if (!actor) {
 			return nullptr;
@@ -75,7 +75,7 @@ namespace Gts {
 
 			result.is_teammate = actor->formID != 0x14 && actor->IsPlayerTeammate();
 
-			auto hhBonusPerk = Runtime::GetSingleton().hhBonus;
+			auto hh_bonus_perk = Runtime::GetSingleton().hhBonus;
 			if (hhBonusPerk) {
 				result.has_hhBonus_perk = actor->HasPerk(hhBonusPerk);
 				if (!result.has_hhBonus_perk && result.is_teammate) {
@@ -93,7 +93,7 @@ namespace Gts {
 		return &this->_actor_data[key];
 	}
 
-	void Transient::UpdateActorData(Actor* actor) {
+	static void Transient::UpdateActorData(Actor* actor) {
 		if (!actor) {
 			return;
 		}
@@ -116,7 +116,7 @@ namespace Gts {
 
 			data.is_teammate = actor->formID != 0x14 && actor->IsPlayerTeammate();
 
-			auto hhBonusPerk = Runtime::GetSingleton().hhBonus;
+			auto hh_bonus_perk = Runtime::GetSingleton().hhBonus;
 			if (hhBonusPerk) {
 				data.has_hhBonus_perk = actor->HasPerk(hhBonusPerk);
 				if (!data.has_hhBonus_perk && data.is_teammate) {

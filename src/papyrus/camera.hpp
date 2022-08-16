@@ -3,5 +3,5 @@
 using namespace RE::BSScript;
 
 namespace Gts {
-	bool register_papyrus_camera(IVirtualMachine* vm);
+	bool RegisterPapyrusCamera(IVirtualMachine* vm);
 }

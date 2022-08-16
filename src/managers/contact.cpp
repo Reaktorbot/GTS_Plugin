@@ -18,31 +18,31 @@ namespace {
 	};
 
 
-	hkpWorldExtension* findWorldExtension(hkpWorld* a_world, WorldExtensionIds a_id) {
+	hkpWorldExtension* FindWorldExtension(hkpWorld* a_world, WorldExtensionIds a_id) {
 		using func_t = decltype(&findWorldExtension);
 		REL::Relocation<func_t> func{ RELOCATION_ID(60549, 61397) };
 		return func(a_world, a_id);
 	}
 
-	bool requireCollisionCallbackUtil(hkpWorld* a_world) {
+	bool RequireCollisionCallbackUtil(hkpWorld* a_world) {
 		using func_t = decltype(&requireCollisionCallbackUtil);
 		REL::Relocation<func_t> func{ RELOCATION_ID(60588, 61437) };
 		return func(a_world);
 	}
 
-	bool releaseCollisionCallbackUtil(hkpWorld* a_world) {
+	bool ReleaseCollisionCallbackUtil(hkpWorld* a_world) {
 		using func_t = decltype(&releaseCollisionCallbackUtil);
 		REL::Relocation<func_t> func{ RELOCATION_ID(61800, 62715) };
 		return func(a_world);
 	}
 
-	void addContactListener(RE::hkpWorld* a_world, RE::hkpContactListener* a_worldListener){
+	void AddContactListener(RE::hkpWorld* a_world, RE::hkpContactListener* a_world_listener){
 		using func_t = decltype(&addContactListener);
 		REL::Relocation<func_t> func{ RELOCATION_ID(60543, 61383) };
 		return func(a_world, a_worldListener);
 	}
 
-	void removeContactListener(hkpWorld* a_this, hkpContactListener* a_worldListener)
+	void RemoveContactListener(hkpWorld* a_this, hkpContactListener* a_world_listener)
 	{
 		hkArray<hkpContactListener*>& listeners = a_this->contactListeners;
 
@@ -55,32 +55,32 @@ namespace {
 		}
 	}
 
-	void addWorldPostSimulationListener(RE::hkpWorld* a_world, RE::hkpWorldPostSimulationListener* a_worldListener) {
+	void AddWorldPostSimulationListener(RE::hkpWorld* a_world, RE::hkpWorldPostSimulationListener* a_world_listener) {
 		using func_t = decltype(&addWorldPostSimulationListener);
 		REL::Relocation<func_t> func{ RELOCATION_ID(60538, 61366) };
 		return func(a_world, a_worldListener);
 	}
 
-	void removeWorldPostSimulationListener(RE::hkpWorld* a_world, RE::hkpWorldPostSimulationListener* a_worldListener) {
+	void RemoveWorldPostSimulationListener(RE::hkpWorld* a_world, RE::hkpWorldPostSimulationListener* a_world_listener) {
 		using func_t = decltype(&removeWorldPostSimulationListener);
 		REL::Relocation<func_t> func{ RELOCATION_ID(60539, 61367) };
 		return func(a_world, a_worldListener);
 	}
 
-	NiAVObject* getNodeFromCollidable(const RE::hkpCollidable* a_collidable) {
+	NiAVObject* GetNodeFromCollidable(const RE::hkpCollidable* a_collidable) {
 		using func_t = decltype(&getNodeFromCollidable);
 		REL::Relocation<func_t> func{ RELOCATION_ID(76160, 77988) };
 		return func(a_collidable);
 	}
 
-	NiAVObject* getNodeFromCollidable(const RE::hkpRigidBody* a_rigidbody) {
-		const auto hkpCollidable = a_rigidbody->GetCollidable();
+	NiAVObject* GetNodeFromCollidable(const RE::hkpRigidBody* a_rigidbody) {
+		const auto hkp_collidable = a_rigidbody->GetCollidable();
 		return hkpCollidable ? getNodeFromCollidable(hkpCollidable) : nullptr;
 	}
 
 
 
-	void print_collision_groups(std::uint64_t flags) {
+	void PrintCollisionGroups(std::uint64_t flags) {
 		std::map<std::string, COL_LAYER> named_layers {
 			{ "kStatic", COL_LAYER::kStatic },
 			{ "kAnimStatic", COL_LAYER::kAnimStatic },
@@ -139,32 +139,43 @@ namespace {
 
 namespace Gts {
 
-	void ContactListener::ContactPointCallback(const hkpContactPointEvent& a_event)
+	static void ContactListener::ContactPointCallback(const hkpContactPointEvent& a_event)
 	{
 		auto rigid_a = a_event.bodies[0];
-		if (!rigid_a) return;
+		if (!rigid_a) { return;
+}
 		auto rigid_b = a_event.bodies[1];
-		if (!rigid_b) return;
+		if (!rigid_b) { return;
+}
 		auto objref_a = rigid_a->GetUserData();
-		if (!objref_a) return;
+		if (!objref_a) { return;
+}
 		auto objref_b = rigid_b->GetUserData();
-		if (!objref_b) return;
+		if (!objref_b) { return;
+}
 		if (objref_a->GetFormType() == Actor::FORMTYPE && objref_b->GetFormType() == Actor::FORMTYPE) {
 			log::info("Both collisions are actors");
 			Actor* actor_a = skyrim_cast<Actor*>(objref_a);
-			if (!actor_a) return;
+			if (!actor_a) { return;
+}
 			Actor* actor_b = skyrim_cast<Actor*>(objref_b);
-			if (!actor_b) return;
-			if (actor_a == actor_b) return;
+			if (!actor_b) { return;
+}
+			if (actor_a == actor_b) { return;
+}
 			auto name_a = actor_a->GetDisplayFullName();
-			if (!name_a) return;
+			if (!name_a) { return;
+}
 			auto name_b = actor_b->GetDisplayFullName();
-			if (!name_b) return;
+			if (!name_b) { return;
+}
 			log::info("Colliding: {} with: {}", name_a, name_b);
 			NiAVObject* node_a = getNodeFromCollidable(rigid_a);
-			if (!node_a) return;
+			if (!node_a) { return;
+}
 			NiAVObject* node_b = getNodeFromCollidable(rigid_b);
-			if (!node_b) return;
+			if (!node_b) { return;
+}
 			auto node_name_a = node_a->name;
 			if (!node_name_a.empty()) {
 				log::info("  - Node A: {}", node_name_a.c_str());
@@ -195,7 +206,7 @@ namespace Gts {
 	void ContactListener::detach() {
 		if (world) {
 			BSWriteLockGuard lock(world->worldLock);
-			auto collisionCallbackExtension = findWorldExtension(world->GetWorld2(), WorldExtensionIds::kCollisionCallback);
+			auto collision_callback_extension = findWorldExtension(world->GetWorld2(), WorldExtensionIds::kCollisionCallback);
 			if (collisionCallbackExtension) {
 				releaseCollisionCallbackUtil(world->GetWorld2());
 			}
@@ -204,7 +215,7 @@ namespace Gts {
 			this->world = nullptr;
 		}
 	}
-	void ContactListener::attach(NiPointer<bhkWorld> world) {
+	static void ContactListener::Attach(NiPointer<bhkWorld> world) {
 		// Only runs if current world is nullptr and new is not
 		if (!this->world && world) {
 			this->world = world;
@@ -221,19 +232,19 @@ namespace Gts {
 		if (listeners[listeners.size() - 1] != this) {
 			BSWriteLockGuard lock(world->worldLock);
 
-			int numListeners = listeners.size();
-			int listenerIndex = -1;
+			int num_listeners = listeners.size();
+			int listener_index = -1;
 
 			// get current index of our listener
-			for (int i = 0; i < numListeners; ++i) {
+			for (int i = 0; i < num_listeners; ++i) {
 				if (listeners[i] == this) {
-					listenerIndex = i;
+					listener_index = i;
 					break;
 				}
 			}
 
-			if (listenerIndex >= 0) {
-				for (int i = listenerIndex + 1; i < numListeners; ++i) {
+			if (listener_index >= 0) {
+				for (int i = listener_index + 1; i < num_listeners; ++i) {
 					listeners[i - 1] = listeners[i];
 				}
 				listeners[numListeners - 1] = this;
@@ -268,11 +279,14 @@ namespace Gts {
 		//   - Collides with kTransparentWall
 		//   - Collides with kTrap
 		//   - Collides with kTrees
-		if (!world) return;
+		if (!world) { return;
+}
 		PlayerCharacter* player = PlayerCharacter::GetSingleton();
-		if (!player) return;
+		if (!player) { return;
+}
 		auto player_data = Persistent::GetSingleton().GetData(player);
-		if (!player_data) return;
+		if (!player_data) { return;
+}
 		auto& camera_collisions = Persistent::GetSingleton().camera_collisions;
 
 		float scale = player_data->target_scale;
@@ -344,7 +358,8 @@ namespace Gts {
 		//  - Collides with kProps
 		//  - Collides with kSpell
 		//  - Collides with kWeapon
-		if (!world) return;
+		if (!world) { return;
+}
 		BSWriteLockGuard lock(world->worldLock);
 
 		RE::bhkCollisionFilter* filter = static_cast<bhkCollisionFilter*>(world->GetWorld2()->collisionFilter);
@@ -370,26 +385,28 @@ namespace Gts {
 	}
 
 	void ContactManager::Update() {
-		auto playerCharacter = PlayerCharacter::GetSingleton();
+		auto player_character = PlayerCharacter::GetSingleton();
 
 		auto cell = playerCharacter->GetParentCell();
-		if (!cell) return;
+		if (!cell) { return;
+}
 
 		auto world = RE::NiPointer<RE::bhkWorld>(cell->GetbhkWorld());
-		if (!world) return;
-		ContactListener& contactListener = this->listener;
+		if (!world) { return;
+}
+		ContactListener& contact_listener = this->listener;
 
 		if (contactListener.world != world) {
-			contactListener.detach();
+			contact_listener.detach();
 			contactListener.attach(world);
-			contactListener.ensure_last();
-			contactListener.enable_biped_collision();
+			contact_listener.ensure_last();
+			contact_listener.enable_biped_collision();
 		}
-		contactListener.sync_camera_collision_groups();
+		contact_listener.sync_camera_collision_groups();
 	}
 
 	void ContactManager::UpdateCameraContacts() {
-		ContactListener& contactListener = this->listener;
-		contactListener.sync_camera_collision_groups();
+		ContactListener& contact_listener = this->listener;
+		contact_listener.sync_camera_collision_groups();
 	}
 }

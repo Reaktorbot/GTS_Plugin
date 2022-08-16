@@ -6,7 +6,7 @@ using namespace SKSE;
 using namespace Gts;
 
 namespace Gts {
-	void walk_nodes(Actor* actor) {
+	void WalkNodes(Actor* actor) {
 		if (!actor->Is3DLoaded()) {
 			return;
 		}
@@ -50,7 +50,7 @@ namespace Gts {
 		}
 	}
 
-	NiAVObject* find_node(Actor* actor, std::string_view node_name, bool first_person) {
+	NiAVObject* FindNode(Actor* actor, std::string_view node_name, bool first_person) {
 		if (!actor->Is3DLoaded()) {
 			return nullptr;
 		}
@@ -105,7 +105,7 @@ namespace Gts {
 		return nullptr;
 	}
 
-	NiAVObject* find_node_regex(Actor* actor, std::string_view node_regex, bool first_person) {
+	NiAVObject* FindNodeRegex(Actor* actor, std::string_view node_regex, bool first_person) {
 		if (!actor->Is3DLoaded()) {
 			return nullptr;
 		}
@@ -158,7 +158,7 @@ namespace Gts {
 		return nullptr;
 	}
 
-	NiAVObject* find_node_any(Actor* actor, std::string_view name) {
+	NiAVObject* FindNodeAny(Actor* actor, std::string_view name) {
 		NiAVObject* result = nullptr;
 		for (auto person: {false, true}) {
 			result = find_node(actor, name, person);
@@ -169,7 +169,7 @@ namespace Gts {
 		return result;
 	}
 
-	NiAVObject* find_node_regex_any(Actor* actor, std::string_view node_regex) {
+	NiAVObject* FindNodeRegexAny(Actor* actor, std::string_view node_regex) {
 		NiAVObject* result = nullptr;
 		for (auto person: {false, true}) {
 			result = find_node_regex(actor, node_regex, person);
@@ -180,7 +180,7 @@ namespace Gts {
 		return result;
 	}
 
-	void scale_hkpnodes(Actor* actor, float prev_scale, float new_scale) {
+	void ScaleHkpnodes(Actor* actor, float prev_scale, float new_scale) {
 		if (!actor->Is3DLoaded()) {
 			return;
 		}
@@ -274,10 +274,9 @@ namespace Gts {
 			}
 		}
 
-		return;
-	}
+			}
 
-	void clone_bound(Actor* actor) {
+	void CloneBound(Actor* actor) {
 		// This is the bound on the NiExtraNodeData
 		// This data is shared between all skeletons and this hopes to correct this
 		auto model = actor->Get3D();
@@ -296,7 +295,7 @@ namespace Gts {
 		}
 	}
 
-	BSBound* get_bound(Actor* actor) {
+	BSBound* GetBound(Actor* actor) {
 		// This is the bound on the NiExtraNodeData
 		auto model = actor->Get3D(false);
 		if (model) {
@@ -317,12 +316,12 @@ namespace Gts {
 		return nullptr;
 	}
 
-	NiAVObject* get_bumper(Actor* actor) {
+	NiAVObject* GetBumper(Actor* actor) {
 		string node_name = "CharacterBumper";
 		return find_node(actor, node_name);
 	}
 
-	void update_node(NiAVObject* node) {
+	void UpdateNode(NiAVObject* node) {
 		if (node) {
 			if (on_mainthread()) {
 				NiUpdateData ctx;

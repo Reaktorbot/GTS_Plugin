@@ -6,12 +6,12 @@ using namespace SKSE;
 using namespace RE;
 
 namespace {
-	inline const auto ActorDataRecord = _byteswap_ulong('ACTD');
-	inline const auto ScaleMethodRecord = _byteswap_ulong('SCMD');
-	inline const auto HighHeelCorrectionRecord = _byteswap_ulong('HHCO');
-	inline const auto IsSpeedAdjustedRecord = _byteswap_ulong('ANAJ');
-	inline const auto TremorScales = _byteswap_ulong('TREM');
-	inline const auto CamCollisions = _byteswap_ulong('CAMC');
+	inline const auto actor_data_record = _byteswap_ulong('ACTD');
+	inline const auto scale_method_record = _byteswap_ulong('SCMD');
+	inline const auto high_heel_correction_record = _byteswap_ulong('HHCO');
+	inline const auto is_speed_adjusted_record = _byteswap_ulong('ANAJ');
+	inline const auto tremor_scales = _byteswap_ulong('TREM');
+	inline const auto cam_collisions = _byteswap_ulong('CAMC');
 }
 
 namespace Gts {
@@ -20,12 +20,12 @@ namespace Gts {
 		return instance;
 	}
 
-	void Persistent::OnRevert(SerializationInterface*) {
+	static void Persistent::OnRevert(SerializationInterface* /*unused*/) {
 		std::unique_lock lock(GetSingleton()._lock);
 		GetSingleton()._actor_data.clear();
 	}
 
-	void Persistent::OnGameLoaded(SerializationInterface* serde) {
+	static void Persistent::OnGameLoaded(SerializationInterface* serde) {
 		std::uint32_t type;
 		std::uint32_t size;
 		std::uint32_t version;
@@ -36,9 +36,9 @@ namespace Gts {
 					std::size_t count;
 					serde->ReadRecordData(&count, sizeof(count));
 					for (; count > 0; --count) {
-						RE::FormID actorFormID;
+						RE::FormID actor_form_id;
 						serde->ReadRecordData(&actorFormID, sizeof(actorFormID));
-						RE::FormID newActorFormID;
+						RE::FormID new_actor_form_id;
 						if (!serde->ResolveFormID(actorFormID, newActorFormID)) {
 							log::warn("Actor ID {:X} could not be found after loading the save.", actorFormID);
 							continue;
@@ -114,10 +114,10 @@ namespace Gts {
 						data.anim_speed = anim_speed;
 						data.effective_multi = effective_multi;
 						TESForm* actor_form = TESForm::LookupByID<Actor>(newActorFormID);
-						if (actor_form) {
+						if (actor_form != nullptr) {
 							Actor* actor = skyrim_cast<Actor*>(actor_form);
-							if (actor) {
-								GetSingleton()._actor_data.insert_or_assign(newActorFormID, data);
+							if (actor != nullptr) {
+								GetSingleton()._actor_data.insert_or_assign(new_actor_form_id, data);
 							} else {
 								log::warn("Actor ID {:X} could not be found after loading the save.", newActorFormID);
 							}
@@ -198,7 +198,7 @@ namespace Gts {
 		}
 	}
 
-	void Persistent::OnGameSaved(SerializationInterface* serde) {
+	static void Persistent::OnGameSaved(SerializationInterface* serde) {
 		std::unique_lock lock(GetSingleton()._lock);
 
 		if (!serde->OpenRecord(ActorDataRecord, 4)) {
@@ -291,7 +291,7 @@ namespace Gts {
 
 	ActorData* Persistent::GetActorData(Actor* actor) {
 		std::unique_lock lock(this->_lock);
-		if (!actor) {
+		if (actor == nullptr) {
 			return nullptr;
 		}
 		auto key = actor->formID;
@@ -300,7 +300,7 @@ namespace Gts {
 			result = &this->_actor_data.at(key);
 		} catch (const std::out_of_range& oor) {
 			// Add new
-			if (!actor) {
+			if (actor == nullptr) {
 				return nullptr;
 			}
 			if (!actor->Is3DLoaded()) {
@@ -325,7 +325,7 @@ namespace Gts {
 	}
 
 	ActorData* Persistent::GetData(TESObjectREFR* refr) {
-		if (!refr) {
+		if (refr == nullptr) {
 			return nullptr;
 		}
 		auto key = refr->formID;

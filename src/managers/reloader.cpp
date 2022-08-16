@@ -6,8 +6,8 @@ using namespace RE;
 
 namespace Gts {
 	void ReloadManager::Initialize() {
-		auto event_sources = ScriptEventSourceHolder::GetSingleton();
-		if (event_sources) {
+		auto *event_sources = ScriptEventSourceHolder::GetSingleton();
+		if (event_sources != nullptr) {
 			event_sources->AddEventSink<TESObjectLoadedEvent>(this);
 			// event_sources->AddEventSink<TESCellFullyLoadedEvent>(this);
 			// event_sources->AddEventSink<TESCellAttachDetachEvent>(this);
@@ -19,9 +19,9 @@ namespace Gts {
 		return instance;
 	}
 
-	BSEventNotifyControl ReloadManager::ProcessEvent(const TESObjectLoadedEvent * evn, BSTEventSource<TESObjectLoadedEvent>* dispatcher)
+	static BSEventNotifyControl ReloadManager::ProcessEvent(const TESObjectLoadedEvent * evn, BSTEventSource<TESObjectLoadedEvent>* dispatcher)
 	{
-		if (evn) {
+		if (evn != nullptr) {
 			auto* actor = TESForm::LookupByID<Actor>(evn->formID);
 			if (actor) {
 				GtsManager::GetSingleton().reapply_actor(actor);
@@ -30,21 +30,21 @@ namespace Gts {
 		return BSEventNotifyControl::kContinue;
 	}
 
-	BSEventNotifyControl ReloadManager::ProcessEvent(const TESCellFullyLoadedEvent* evn, BSTEventSource<TESCellFullyLoadedEvent>* dispatcher)
+	static BSEventNotifyControl ReloadManager::ProcessEvent(const TESCellFullyLoadedEvent* evn, BSTEventSource<TESCellFullyLoadedEvent>* dispatcher)
 	{
 		GtsManager::GetSingleton().reapply();
 		return BSEventNotifyControl::kContinue;
 	}
 
-	BSEventNotifyControl ReloadManager::ProcessEvent(const TESCellAttachDetachEvent* evn, BSTEventSource<TESCellAttachDetachEvent>* dispatcher)
+	static BSEventNotifyControl ReloadManager::ProcessEvent(const TESCellAttachDetachEvent* evn, BSTEventSource<TESCellAttachDetachEvent>* dispatcher)
 	{
 		GtsManager::GetSingleton().reapply();
 		return BSEventNotifyControl::kContinue;
 	}
 
-	BSEventNotifyControl ReloadManager::ProcessEvent(const TESEquipEvent* evn, BSTEventSource<TESEquipEvent>* dispatcher)
+	static BSEventNotifyControl ReloadManager::ProcessEvent(const TESEquipEvent* evn, BSTEventSource<TESEquipEvent>* dispatcher)
 	{
-		if (evn) {
+		if (evn != nullptr) {
 			auto* actor = TESForm::LookupByID<Actor>(evn->actor->formID);
 			if (actor) {
 				GtsManager::GetSingleton().reapply_actor(actor);

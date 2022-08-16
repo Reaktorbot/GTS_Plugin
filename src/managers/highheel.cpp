@@ -9,7 +9,7 @@ using namespace RE;
 using namespace Gts;
 
 namespace {
-	NiAVObject* find_any_node(Actor* actor, std::string_view name) {
+	NiAVObject* FindAnyNode(Actor* actor, std::string_view name) {
 		for (bool person: {false, true}) {
 			auto found = find_node(actor, name, person);
 			if (found) {
@@ -21,11 +21,11 @@ namespace {
 }
 
 namespace Gts {
-	void apply_highheel(Actor* actor, TempActorData* temp_data, bool force) {
-		if (!actor) {
+	void ApplyHighheel(Actor* actor, TempActorData* temp_data, bool force) {
+		if (actor == nullptr) {
 			return;
 		}
-		if (!temp_data) {
+		if (temp_data == nullptr) {
 			return;
 		}
 
@@ -40,22 +40,22 @@ namespace Gts {
 			}
 		} else {
 			NiAVObject* npc_node = find_any_node(actor, "NPC");
-			if (!npc_node) {
+			if (npc_node == nullptr) {
 				return;
 			}
 
 			NiAVObject* root_node = find_any_node(actor, "NPC Root [Root]");
-			if (!root_node) {
+			if (root_node == nullptr) {
 				return;
 			}
 
 			NiAVObject* com_node = find_any_node(actor, "NPC COM [COM ]");
-			if (!com_node) {
+			if (com_node == nullptr) {
 				return;
 			}
 
 			NiAVObject* body_node = find_any_node(actor, "CME Body [Body]");
-			if (!body_node) {
+			if (body_node == nullptr) {
 				return;
 			}
 

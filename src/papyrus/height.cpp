@@ -9,38 +9,38 @@ using namespace RE;
 using namespace RE::BSScript;
 
 namespace {
-	constexpr std::string_view PapyrusClass = "GtsHeight";
+	constexpr std::string_view papyrus_class = "GtsHeight";
 
 	// Target Scales
-	void SetTargetHeight(StaticFunctionTag*, Actor* actor, float height) {
+	void SetTargetHeight(StaticFunctionTag* /*unused*/, Actor* actor, float height) {
 		set_target_height(actor, height);
 	}
 
-	float GetTargetHeight(StaticFunctionTag*, Actor* actor) {
+	float GetTargetHeight(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_target_height(actor);
 	}
 
-	void ModTargetHeight(StaticFunctionTag*, Actor* actor, float amt) {
+	void ModTargetHeight(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		mod_target_height(actor, amt);
 	}
 
-	void SetMaxHeight(StaticFunctionTag*, Actor* actor, float height) {
+	void SetMaxHeight(StaticFunctionTag* /*unused*/, Actor* actor, float height) {
 		set_max_height(actor, height);
 	}
 
-	float GetMaxHeight(StaticFunctionTag*, Actor* actor) {
+	float GetMaxHeight(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_max_height(actor);
 	}
 
-	void ModMaxHeight(StaticFunctionTag*, Actor* actor, float amt) {
+	void ModMaxHeight(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		mod_max_height(actor, amt);
 	}
 
-	float GetVisualHeight(StaticFunctionTag*, Actor* actor) {
+	float GetVisualHeight(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_visual_height(actor);
 	}
 
-	void ModTeammateHeight(StaticFunctionTag*, float amt) {
+	void ModTeammateHeight(StaticFunctionTag* /*unused*/, float amt) {
 		for (auto actor: find_actors()) {
 			if (!actor) {
 				continue;
@@ -56,7 +56,7 @@ namespace {
 }
 
 namespace Gts {
-	bool register_papyrus_height(IVirtualMachine* vm) {
+	bool RegisterPapyrusHeight(IVirtualMachine* vm) {
 		vm->RegisterFunction("SetTargetHeight", PapyrusClass, SetTargetHeight);
 		vm->RegisterFunction("GetTargetHeight", PapyrusClass, GetTargetHeight);
 		vm->RegisterFunction("ModTargetHeight", PapyrusClass, ModTargetHeight);

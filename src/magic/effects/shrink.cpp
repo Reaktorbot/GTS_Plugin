@@ -5,7 +5,7 @@
 #include "data/runtime.hpp"
 
 namespace Gts {
-	bool Shrink::StartEffect(EffectSetting* effect) {
+	static bool Shrink::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return effect == runtime.ShrinkSpell;
 	}
@@ -22,13 +22,13 @@ namespace Gts {
 
 		auto& runtime = Runtime::GetSingleton();
 		float size_limit = runtime.sizeLimit->value;
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float casterScale = get_visual_scale(caster);
-		float DualCast = 1.0;
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float caster_scale = get_visual_scale(caster);
+		float dual_cast = 1.0;
 		if (IsDualCasting()) {
-			DualCast = 2.0;
+			dual_cast = 2.0;
 		}
-		if (casterScale < size_limit) {
+		if (caster_scale < size_limit) {
 			mod_target_scale(caster, -0.0018* ProgressionMultiplier * DualCast);
 		}
 	}

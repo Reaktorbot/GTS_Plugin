@@ -8,16 +8,16 @@ using namespace RE;
 using namespace RE::BSScript;
 
 namespace {
-	constexpr std::string_view PapyrusClass = "GtsEvent";
+	constexpr std::string_view papyrus_class = "GtsEvent";
 
-	void RegisterOnFootstep(StaticFunctionTag*, TESForm* form) {
+	void RegisterOnFootstep(StaticFunctionTag* /*unused*/, TESForm* form) {
 		if (!form) {
 			return;
 		}
 		auto event_manager = ModEventManager::GetSingleton();
 		event_manager.m_onfootstep.Register(form);
 	}
-	void UnRegisterOnFootstep(StaticFunctionTag*, TESForm* form) {
+	void UnRegisterOnFootstep(StaticFunctionTag* /*unused*/, TESForm* form) {
 		if (!form) {
 			return;
 		}
@@ -27,7 +27,7 @@ namespace {
 }
 
 namespace Gts {
-	bool register_papyrus_events(IVirtualMachine* vm) {
+	bool RegisterPapyrusEvents(IVirtualMachine* vm) {
 		vm->RegisterFunction("RegisterOnFootstep", PapyrusClass, RegisterOnFootstep);
 		vm->RegisterFunction("UnRegisterOnFootstep", PapyrusClass, UnRegisterOnFootstep);
 

@@ -16,6 +16,6 @@ namespace Gts {
 
 			ExplosiveGrowth(ActiveEffect* effect);
 		private:
-			float power = 0.0;
+			float _power = 0.0;
 	};
 }

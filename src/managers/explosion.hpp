@@ -12,6 +12,6 @@ namespace Gts {
 		public:
 			[[nodiscard]] static ExplosionManager& GetSingleton() noexcept;
 
-			void OnImpact(const Impact& impact);
+			static void OnImpact(const Impact& impact);
 	};
 }

@@ -9,14 +9,10 @@ namespace Gts {
 		auto base_spell = GetBaseEffect();
 		auto& runtime = Runtime::GetSingleton();
 
-		if (base_spell == runtime.TrueAbsorb) {
-			this->true_absorb = true;
-		} else {
-			this->true_absorb = false;
-		}
+		this->true_absorb = base_spell == runtime.TrueAbsorb;
 	}
 
-	bool Absorb::StartEffect(EffectSetting* effect) {
+	static bool Absorb::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return (effect == runtime.AbsorbMGEF || effect == runtime.TrueAbsorb);
 	}
@@ -32,12 +28,12 @@ namespace Gts {
 		}
 
 		auto& runtime = Runtime::GetSingleton();
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float casterScale = get_visual_scale(caster);
-		float targetScale = get_visual_scale(target);
-		float SizeDifference = casterScale/targetScale;
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float caster_scale = get_visual_scale(caster);
+		float target_scale = get_visual_scale(target);
+		float size_difference = caster_scale/target_scale;
 		if (caster->HasMagicEffect(runtime.smallMassiveThreat)) {
-			SizeDifference *= 4.0;
+			size_difference *= 4.0;
 			} // Insta-absorb if SMT is active
 		if (SizeDifference >= 4.0 && target->HasMagicEffect(runtime.TrueAbsorb) == false)
 		{caster->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant)->CastSpellImmediate(runtime.TrueAbsorbSpell, false, target, 1.00f, false, 0.0f, caster);}

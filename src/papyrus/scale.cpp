@@ -11,10 +11,10 @@ using namespace RE;
 using namespace RE::BSScript;
 
 namespace {
-	constexpr std::string_view PapyrusClass = "GtsScale";
+	constexpr std::string_view papyrus_class = "GtsScale";
 
 	// Model Scale
-	bool SetModelScale(StaticFunctionTag*, Actor* actor, float scale) {
+	bool SetModelScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -25,14 +25,14 @@ namespace {
 		}
 		return result;
 	}
-	float GetModelScale(StaticFunctionTag*, Actor* actor) {
-		if (!actor) {
+	float GetModelScale(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor == nullptr) {
 			return 0.0;
 		}
 		auto result = get_model_scale(actor);
 		return result;
 	}
-	bool ModModelScale(StaticFunctionTag*, Actor* actor, float amt) {
+	bool ModModelScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -46,7 +46,7 @@ namespace {
 	}
 
 	// Node Scale
-	bool SetNodeScale(StaticFunctionTag*, Actor* actor, float scale) {
+	bool SetNodeScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -57,14 +57,14 @@ namespace {
 		}
 		return result;
 	}
-	float GetNodeScale(StaticFunctionTag*, Actor* actor) {
-		if (!actor) {
+	float GetNodeScale(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor == nullptr) {
 			return 0.0;
 		}
 		auto result = get_npcnode_scale(actor);
 		return result;
 	}
-	bool ModNodeScale(StaticFunctionTag*, Actor* actor, float amt) {
+	bool ModNodeScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -78,7 +78,7 @@ namespace {
 	}
 
 	// Ref scale
-	bool SetRefScale(StaticFunctionTag*, Actor* actor, float scale) {
+	bool SetRefScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -90,14 +90,14 @@ namespace {
 		}
 		return result;
 	}
-	float GetRefScale(StaticFunctionTag*, Actor* actor) {
-		if (!actor) {
+	float GetRefScale(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor == nullptr) {
 			return 0.0;
 		}
 		auto result = get_ref_scale(actor);
 		return result;
 	}
-	bool ModRefScale(StaticFunctionTag*, Actor* actor, float amt) {
+	bool ModRefScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -112,7 +112,7 @@ namespace {
 	}
 
 	// Configurable scale
-	void SetScaleMethod(StaticFunctionTag*, int size_method) {
+	void SetScaleMethod(StaticFunctionTag* /*unused*/, int size_method) {
 		switch (size_method) {
 			case 0:
 				Persistent::GetSingleton().size_method = SizeMethod::ModelScale;
@@ -125,7 +125,7 @@ namespace {
 				break;
 		}
 	}
-	int GetScaleMethod(StaticFunctionTag*) {
+	int GetScaleMethod(StaticFunctionTag* /*unused*/) {
 		switch (Persistent::GetSingleton().size_method) {
 			case SizeMethod::ModelScale:
 				return 0;
@@ -140,7 +140,7 @@ namespace {
 		log::error("Scale method is invalid");
 		return Persistent::GetSingleton().size_method;
 	}
-	bool SetScale(StaticFunctionTag*, Actor* actor, float scale) {
+	bool SetScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -151,14 +151,14 @@ namespace {
 		}
 		return result;
 	}
-	float GetScale(StaticFunctionTag*, Actor* actor) {
-		if (!actor) {
+	float GetScale(StaticFunctionTag* /*unused*/, Actor* actor) {
+		if (actor == nullptr) {
 			return 0.0;
 		}
 		auto result = get_scale(actor);
 		return result;
 	}
-	bool ModScale(StaticFunctionTag*, Actor* actor, float amt) {
+	bool ModScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		bool result = false;
 		auto actor_data = Persistent::GetSingleton().GetData(actor);
 		if (actor_data) {
@@ -172,35 +172,35 @@ namespace {
 	}
 
 	// Target Scales
-	void SetTargetScale(StaticFunctionTag*, Actor* actor, float scale) {
+	void SetTargetScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		set_target_scale(actor, scale);
 	}
 
-	float GetTargetScale(StaticFunctionTag*, Actor* actor) {
+	float GetTargetScale(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_target_scale(actor);
 	}
 
-	void ModTargetScale(StaticFunctionTag*, Actor* actor, float amt) {
+	void ModTargetScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		mod_target_scale(actor, amt);
 	}
 
-	void SetMaxScale(StaticFunctionTag*, Actor* actor, float scale) {
+	void SetMaxScale(StaticFunctionTag* /*unused*/, Actor* actor, float scale) {
 		set_max_scale(actor, scale);
 	}
 
-	float GetMaxScale(StaticFunctionTag*, Actor* actor) {
+	float GetMaxScale(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_max_scale(actor);
 	}
 
-	void ModMaxScale(StaticFunctionTag*, Actor* actor, float amt) {
+	void ModMaxScale(StaticFunctionTag* /*unused*/, Actor* actor, float amt) {
 		mod_max_scale(actor, amt);
 	}
 
-	float GetVisualScale(StaticFunctionTag*, Actor* actor) {
+	float GetVisualScale(StaticFunctionTag* /*unused*/, Actor* actor) {
 		return get_visual_scale(actor);
 	}
 
-	void ModTeammateScale(StaticFunctionTag*, float amt) {
+	void ModTeammateScale(StaticFunctionTag* /*unused*/, float amt) {
 		for (auto actor: find_actors()) {
 			if (!actor) {
 				continue;
@@ -216,36 +216,36 @@ namespace {
 }
 
 namespace Gts {
-	bool register_papyrus_scale(IVirtualMachine* vm) {
-		vm->RegisterFunction("SetModelScale", PapyrusClass, SetModelScale);
-		vm->RegisterFunction("GetModelScale", PapyrusClass, GetModelScale);
-		vm->RegisterFunction("ModModelScale", PapyrusClass, ModModelScale);
+	bool RegisterPapyrusScale(IVirtualMachine* vm) {
+		vm->RegisterFunction("SetModelScale", papyrus_class, SetModelScale);
+		vm->RegisterFunction("GetModelScale", papyrus_class, GetModelScale);
+		vm->RegisterFunction("ModModelScale", papyrus_class, ModModelScale);
 
-		vm->RegisterFunction("SetNodeScale", PapyrusClass, SetNodeScale);
-		vm->RegisterFunction("GetNodeScale", PapyrusClass, GetNodeScale);
-		vm->RegisterFunction("ModNodeScale", PapyrusClass, ModNodeScale);
+		vm->RegisterFunction("SetNodeScale", papyrus_class, SetNodeScale);
+		vm->RegisterFunction("GetNodeScale", papyrus_class, GetNodeScale);
+		vm->RegisterFunction("ModNodeScale", papyrus_class, ModNodeScale);
 
-		vm->RegisterFunction("SetRefScale", PapyrusClass, SetRefScale);
-		vm->RegisterFunction("GetRefScale", PapyrusClass, GetRefScale);
-		vm->RegisterFunction("ModRefScale", PapyrusClass, ModRefScale);
+		vm->RegisterFunction("SetRefScale", papyrus_class, SetRefScale);
+		vm->RegisterFunction("GetRefScale", papyrus_class, GetRefScale);
+		vm->RegisterFunction("ModRefScale", papyrus_class, ModRefScale);
 
-		vm->RegisterFunction("SetScaleMethod", PapyrusClass, SetScaleMethod);
-		vm->RegisterFunction("GetScaleMethod", PapyrusClass, GetScaleMethod);
-		vm->RegisterFunction("SetScale", PapyrusClass, SetScale);
-		vm->RegisterFunction("GetScale", PapyrusClass, GetScale);
-		vm->RegisterFunction("ModScale", PapyrusClass, ModScale);
+		vm->RegisterFunction("SetScaleMethod", papyrus_class, SetScaleMethod);
+		vm->RegisterFunction("GetScaleMethod", papyrus_class, GetScaleMethod);
+		vm->RegisterFunction("SetScale", papyrus_class, SetScale);
+		vm->RegisterFunction("GetScale", papyrus_class, GetScale);
+		vm->RegisterFunction("ModScale", papyrus_class, ModScale);
 
-		vm->RegisterFunction("SetTargetScale", PapyrusClass, SetTargetScale);
-		vm->RegisterFunction("GetTargetScale", PapyrusClass, GetTargetScale);
-		vm->RegisterFunction("ModTargetScale", PapyrusClass, ModTargetScale);
+		vm->RegisterFunction("SetTargetScale", papyrus_class, SetTargetScale);
+		vm->RegisterFunction("GetTargetScale", papyrus_class, GetTargetScale);
+		vm->RegisterFunction("ModTargetScale", papyrus_class, ModTargetScale);
 
-		vm->RegisterFunction("SetMaxScale", PapyrusClass, SetMaxScale);
-		vm->RegisterFunction("GetMaxScale", PapyrusClass, GetMaxScale);
-		vm->RegisterFunction("ModMaxScale", PapyrusClass, ModMaxScale);
+		vm->RegisterFunction("SetMaxScale", papyrus_class, SetMaxScale);
+		vm->RegisterFunction("GetMaxScale", papyrus_class, GetMaxScale);
+		vm->RegisterFunction("ModMaxScale", papyrus_class, ModMaxScale);
 
-		vm->RegisterFunction("GetVisualScale", PapyrusClass, GetVisualScale);
+		vm->RegisterFunction("GetVisualScale", papyrus_class, GetVisualScale);
 
-		vm->RegisterFunction("ModTeammateScale", PapyrusClass, ModTeammateScale);
+		vm->RegisterFunction("ModTeammateScale", papyrus_class, ModTeammateScale);
 
 		return true;
 	}

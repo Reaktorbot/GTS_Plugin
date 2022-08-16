@@ -16,7 +16,7 @@ namespace {
 }
 
 namespace Gts {
-	bool register_papyrus(IVirtualMachine* vm) {
+	bool RegisterPapyrus(IVirtualMachine* vm) {
 		register_papyrus_plugin(vm);
 		register_papyrus_scale(vm);
 		register_papyrus_height(vm);

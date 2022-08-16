@@ -27,6 +27,6 @@ namespace Gts {
 		public:
 			[[nodiscard]] static ImpactManager& GetSingleton() noexcept;
 
-			void HookProcessEvent(BGSImpactManager* impact, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_eventSource);
+			void HookProcessEvent(ImpactManager* impact, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_event_source);
 	};
 }

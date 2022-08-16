@@ -7,7 +7,7 @@ using namespace SKSE;
 using namespace RE;
 
 namespace Gts {
-	class ContactListener : public hkpContactListener, public hkpWorldPostSimulationListener
+	class ContactListener : public ContactListener, public hkpWorldPostSimulationListener
 	{
 
 		public:
@@ -21,11 +21,11 @@ namespace Gts {
 
 			RE::NiPointer<RE::bhkWorld> world = nullptr;
 
-			void detach();
-			void attach(NiPointer<bhkWorld> world);
-			void ensure_last();
-			void sync_camera_collision_groups();
-			void enable_biped_collision();
+			void Detach();
+			void Attach(NiPointer<bhkWorld> world);
+			static void EnsureLast();
+			void SyncCameraCollisionGroups();
+			void EnableBipedCollision();
 	};
 
 	class ContactManager {

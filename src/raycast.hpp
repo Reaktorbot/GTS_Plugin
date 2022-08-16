@@ -16,10 +16,10 @@ namespace Gts {
 	class RayCollector : public hkpClosestRayHitCollector
 	{
 		public:
-			void add_filter(NiObject* obj) noexcept;
-			bool is_filtered(NiObject* obj);
-			bool is_filtered_av(NiAVObject* obj);
-			void AddRayHit(const hkpCdBody& a_body, const hkpShapeRayCastCollectorOutput& a_hitInfo) override;
+			void AddFilter(NiObject* obj) noexcept;
+			bool IsFiltered(NiObject* obj);
+			bool IsFilteredAv(NiAVObject* obj);
+			void AddRayHit(const hkpCdBody& a_body, const hkpShapeRayCastCollectorOutput& a_hit_info) override;
 
 			std::vector<NiObject*> object_filter;
 			std::vector<HitResult> results;

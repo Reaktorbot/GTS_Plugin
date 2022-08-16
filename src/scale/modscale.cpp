@@ -7,18 +7,18 @@
 using namespace Gts;
 
 namespace Gts {
-	void set_ref_scale(Actor* actor, float target_scale) {
+	void SetRefScale(Actor* actor, float target_scale) {
 		// This is how the game sets scale with the `SetScale` command
 		// It is limited to x10 and messes up all sorts of things like actor damage
 		// and anim speeds
-		float refScale = static_cast<float>(actor->refScale) / 100.0F;
-		if (fabs(refScale - target_scale) > 1e-5) {
+		float ref_scale = static_cast<float>(actor->refScale) / 100.0F;
+		if (fabs(ref_scale - target_scale) > 1e-5) {
 			actor->refScale = static_cast<std::uint16_t>(target_scale * 100.0F);
 			actor->DoReset3D(false);
 		}
 	}
 
-	bool set_model_scale(Actor* actor, float target_scale) {
+	bool SetModelScale(Actor* actor, float target_scale) {
 		// This will set the scale of the model root (not the root npc node)
 		if (!actor->Is3DLoaded()) {
 			return false;
@@ -41,7 +41,7 @@ namespace Gts {
 		return result;
 	}
 
-	bool set_npcnode_scale(Actor* actor, float target_scale) {
+	bool SetNpcnodeScale(Actor* actor, float target_scale) {
 		// This will set the scale of the root npc node
 		string node_name = "NPC Root [Root]";
 		bool result = false;
@@ -61,7 +61,7 @@ namespace Gts {
 		return result;
 	}
 
-	float get_npcnode_scale(Actor* actor) {
+	float GetNpcnodeScale(Actor* actor) {
 		// This will set the scale of the root npc node
 		string node_name = "NPC Root [Root]";
 		auto node = find_node(actor, node_name, false);
@@ -75,7 +75,7 @@ namespace Gts {
 		return -1.0;
 	}
 
-	float get_model_scale(Actor* actor) {
+	float GetModelScale(Actor* actor) {
 		// This will set the scale of the root npc node
 		if (!actor->Is3DLoaded()) {
 			return -1.0;
@@ -91,38 +91,38 @@ namespace Gts {
 		return -1.0;
 	}
 
-	float get_ref_scale(Actor* actor) {
+	float GetRefScale(Actor* actor) {
 		// This will set the scale of the root npc node
 		return static_cast<float>(actor->refScale) / 100.0F;
 	}
 
-	float get_scale(Actor* actor) {
-		float ref_scale = get_ref_scale(actor);
+	float GetScale(Actor* actor) {
+		float ref_scale = GetRefScale(actor);
 		if (ref_scale < 0.0) {
 			return -1.0;
 		}
-		float model_scale = get_model_scale(actor);
+		float model_scale = GetModelScale(actor);
 		if (model_scale < 0.0) {
 			return -1.0;
 		}
-		float node_scale = get_npcnode_scale(actor);
+		float node_scale = GetNpcnodeScale(actor);
 		if (node_scale < 0.0) {
 			return -1.0;
 		}
 		return ref_scale * model_scale * node_scale;
 	}
 
-	bool set_scale(Actor* actor, float scale) {
+	bool SetScale(Actor* actor, float scale) {
 		auto& size_method = Persistent::GetSingleton().size_method;
 		switch (size_method) {
 			case SizeMethod::ModelScale:
-				return set_model_scale(actor, scale/(get_ref_scale(actor)*get_npcnode_scale(actor)));
+				return SetModelScale(actor, scale/(GetRefScale(actor)*GetNpcnodeScale(actor)));
 				break;
 			case SizeMethod::RootScale:
-				return set_npcnode_scale(actor, scale/(get_ref_scale(actor)*get_model_scale(actor)));
+				return SetNpcnodeScale(actor, scale/(GetRefScale(actor)*GetModelScale(actor)));
 				break;
 			case SizeMethod::RefScale:
-				set_ref_scale(actor, scale/(get_npcnode_scale(actor)*get_model_scale(actor)));
+				SetRefScale(actor, scale/(GetNpcnodeScale(actor)*GetModelScale(actor)));
 				return true;
 				break;
 		}

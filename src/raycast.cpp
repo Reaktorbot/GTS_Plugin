@@ -6,10 +6,10 @@ using namespace RE;
 
 namespace Gts {
 
-	void RayCollector::add_filter(NiObject* obj) noexcept {
+	void RayCollector::AddFilter(NiObject* obj) noexcept {
 		object_filter.push_back(obj);
 	}
-	bool RayCollector::is_filtered(NiObject* obj) {
+	static bool RayCollector::IsFiltered(NiObject* obj) {
 		for (auto object: this->object_filter) {
 			if (obj == object) {
 				return true;
@@ -17,7 +17,7 @@ namespace Gts {
 		}
 		return false;
 	}
-	bool RayCollector::is_filtered_av(NiAVObject* obj) {
+	static bool RayCollector::IsFilteredAv(NiAVObject* obj) {
 		while (obj) {
 			if (!is_filtered(obj)) {
 				obj = obj->parent;
@@ -28,7 +28,7 @@ namespace Gts {
 		return false;
 	}
 
-	void RayCollector::AddRayHit(const hkpCdBody& a_body, const hkpShapeRayCastCollectorOutput& a_hitInfo) {
+	void RayCollector::AddRayHit(const hkpCdBody& a_body, const hkpShapeRayCastCollectorOutput& a_hit_info) {
 		const hkpShape* shape = a_body.GetShape(); // Shape that was collided with
 
 		// Search for top level shape
@@ -79,7 +79,8 @@ namespace Gts {
 			return NiPoint3();
 		}
 		auto cell = actor->GetParentCell();
-		if (!cell) return NiPoint3();
+		if (!cell) { return NiPoint3();
+}
 		auto collision_world = cell->GetbhkWorld();
 		if (!collision_world) {
 			return NiPoint3();
@@ -107,7 +108,7 @@ namespace Gts {
 		collision_world->PickObject(pick_data);
 		float min_fraction = 1.0;
 		success = !collector.results.empty();
-		if (collector.results.size() > 0) {
+		if (!collector.results.empty()) {
 			success = true;
 			for (auto ray_result: collector.results) {
 				if (ray_result.fraction < min_fraction) {

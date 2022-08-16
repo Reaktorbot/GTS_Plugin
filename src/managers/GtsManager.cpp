@@ -16,17 +16,17 @@ using namespace SKSE;
 using namespace std;
 
 namespace {
-	void update_height(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data) {
-		if (!actor) {
+	void UpdateHeight(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data) {
+		if (actor == nullptr) {
 			return;
 		}
 		if (!actor->Is3DLoaded()) {
 			return;
 		}
-		if (!trans_actor_data) {
+		if (trans_actor_data == nullptr) {
 			return;
 		}
-		if (!persi_actor_data) {
+		if (persi_actor_data == nullptr) {
 			return;
 		}
 		float target_scale = min(persi_actor_data->target_scale, persi_actor_data->max_scale);
@@ -47,17 +47,17 @@ namespace {
 				);
 		}
 	}
-	void apply_height(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data, bool force = false) {
-		if (!actor) {
+	void ApplyHeight(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data, bool force = false) {
+		if (actor == nullptr) {
 			return;
 		}
 		if (!actor->Is3DLoaded()) {
 			return;
 		}
-		if (!trans_actor_data) {
+		if (trans_actor_data == nullptr) {
 			return;
 		}
-		if (!persi_actor_data) {
+		if (persi_actor_data == nullptr) {
 			return;
 		}
 		float scale = get_scale(actor);
@@ -80,20 +80,20 @@ namespace {
 		set_scale(actor, visual_scale);
 	}
 
-	void apply_speed(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data, bool force = false) {
+	void ApplySpeed(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data, bool force = false) {
 		if (!Persistent::GetSingleton().is_speed_adjusted) {
 			return;
 		}
-		if (!actor) {
+		if (actor == nullptr) {
 			return;
 		}
 		if (!actor->Is3DLoaded()) {
 			return;
 		}
-		if (!trans_actor_data) {
+		if (trans_actor_data == nullptr) {
 			return;
 		}
-		if (!persi_actor_data) {
+		if (persi_actor_data == nullptr) {
 			return;
 		}
 
@@ -102,55 +102,31 @@ namespace {
 			return;
 		}
 		SoftPotential& speed_adjustment = Persistent::GetSingleton().speed_adjustment;
-		SoftPotential& MS_adjustment = Persistent::GetSingleton().MS_adjustment;
+		SoftPotential& ms_adjustment = Persistent::GetSingleton().MS_adjustment;
 		float speed_mult = soft_core(scale, speed_adjustment);
 		persi_actor_data->anim_speed = speed_mult;
-		float MS_mult = soft_core(scale, MS_adjustment);
-		persi_actor_data->anim_speed = MS_mult;
-		actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult / MS_mult);
+		float ms_mult = soft_core(scale, ms_adjustment);
+		persi_actor_data->anim_speed = ms_mult;
+		actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult / ms_mult);
 		if (actor->IsWalking() == true) {
-			actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult * 0.50 / MS_mult);
+			actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult * 0.50 / ms_mult);
 		} else if (actor->IsSprinting() == true) {
-			actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult * 1.28 / MS_mult);
+			actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult * 1.28 / ms_mult);
 		}
 
 		// Experiement
-		if (false) {
-			auto& rot_speed = actor->currentProcess->middleHigh->rotationSpeed;
-			if (fabs(rot_speed.x) > 1e-5 || fabs(rot_speed.y) > 1e-5 || fabs(rot_speed.z) > 1e-5) {
-				log::info("{} rotationSpeed: {},{},{}", actor_name(actor), rot_speed.x,rot_speed.y,rot_speed.z);
-				actor->currentProcess->middleHigh->rotationSpeed.x *= speed_mult;
-				actor->currentProcess->middleHigh->rotationSpeed.y *= speed_mult;
-				actor->currentProcess->middleHigh->rotationSpeed.z *= speed_mult;
-			}
-			auto& animationDelta = actor->currentProcess->high->animationDelta;
-			if (fabs(animationDelta.x) > 1e-5 || fabs(animationDelta.y) > 1e-5 || fabs(animationDelta.z) > 1e-5) {
-				log::info("{} animationDelta: {},{},{}", actor_name(actor), animationDelta.x,animationDelta.y,animationDelta.z);
-			}
-			auto& animationAngleMod = actor->currentProcess->high->animationAngleMod;
-			if (fabs(animationAngleMod.x) > 1e-5 || fabs(animationAngleMod.y) > 1e-5 || fabs(animationAngleMod.z) > 1e-5) {
-				log::info("{} animationAngleMod: {},{},{}", actor_name(actor), animationAngleMod.x,animationAngleMod.y,animationAngleMod.z);
-			}
-			auto& pathingCurrentRotationSpeed = actor->currentProcess->high->pathingCurrentRotationSpeed;
-			if (fabs(pathingCurrentRotationSpeed.x) > 1e-5 || fabs(pathingCurrentRotationSpeed.y) > 1e-5 || fabs(pathingCurrentRotationSpeed.z) > 1e-5) {
-				log::info("{} pathingCurrentRotationSpeed: {},{},{}", actor_name(actor), pathingCurrentRotationSpeed.x,pathingCurrentRotationSpeed.y,pathingCurrentRotationSpeed.z);
-			}
-			auto& pathingDesiredRotationSpeed = actor->currentProcess->high->pathingDesiredRotationSpeed;
-			if (fabs(pathingDesiredRotationSpeed.x) > 1e-5 || fabs(pathingDesiredRotationSpeed.y) > 1e-5 || fabs(pathingDesiredRotationSpeed.z) > 1e-5) {
-				log::info("{} pathingDesiredRotationSpeed: {},{},{}", actor_name(actor), pathingDesiredRotationSpeed.x,pathingDesiredRotationSpeed.y,pathingDesiredRotationSpeed.z);
-			}
-		}
+		
 	}
 
-	void update_effective_multi(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data) {
-		if (!actor) {
+	void UpdateEffectiveMulti(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data) {
+		if (actor == nullptr) {
 			return;
 		}
-		if (!persi_actor_data) {
+		if (persi_actor_data == nullptr) {
 			return;
 		}
-		auto small_massive_threat = Runtime::GetSingleton().smallMassiveThreat;
-		if (!small_massive_threat) {
+		auto *small_massive_threat = Runtime::GetSingleton().smallMassiveThreat;
+		if (small_massive_threat == nullptr) {
 			return;
 		}
 		if (actor->HasMagicEffect(small_massive_threat)) {
@@ -160,16 +136,16 @@ namespace {
 		}
 	}
 
-	void update_actor(Actor* actor) {
+	void UpdateActor(Actor* actor) {
 		Transient::GetSingleton().UpdateActorData(actor);
 
-		auto temp_data = Transient::GetSingleton().GetActorData(actor);
-		auto saved_data = Persistent::GetSingleton().GetActorData(actor);
-		update_effective_multi(actor, saved_data, temp_data);
-		update_height(actor, saved_data, temp_data);
+		auto *temp_data = Transient::GetSingleton().GetActorData(actor);
+		auto *saved_data = Persistent::GetSingleton().GetActorData(actor);
+		UpdateEffectiveMulti(actor, saved_data, temp_data);
+		UpdateHeight(actor, saved_data, temp_data);
 	}
 
-	void apply_actor(Actor* actor, bool force = false) {
+	void ApplyActor(Actor* actor, bool force = false) {
 		auto temp_data = Transient::GetSingleton().GetData(actor);
 		auto saved_data = Persistent::GetSingleton().GetData(actor);
 		apply_height(actor, saved_data, temp_data, force);
@@ -206,27 +182,27 @@ namespace {
 		}
 
 		if (game_mode != ChosenGameMode::None) {
-			float GrowthRate = runtime.GrowthModeRate->value;
-			float ShrinkRate = runtime.ShrinkModeRate->value;
+			float growth_rate = runtime.GrowthModeRate->value;
+			float shrink_rate = runtime.ShrinkModeRate->value;
 
 			float natural_scale = 1.0;
-			float Scale = get_visual_scale(actor);
+			float scale = get_visual_scale(actor);
 			switch (game_mode) {
 				case ChosenGameMode::Grow: {
-					mod_target_scale(actor, Scale * (0.00010 + (GrowthRate * 0.25)));
+					mod_target_scale(actor, scale * (0.00010 + (growth_rate * 0.25)));
 					break;
 				}
 				case ChosenGameMode::Shrink: {
-					if (Scale > natural_scale) {
-						mod_target_scale(actor, Scale * -(0.00025 + (ShrinkRate * 0.25)));
+					if (scale > natural_scale) {
+						mod_target_scale(actor, scale * -(0.00025 + (shrink_rate * 0.25)));
 					}
 					break;
 				}
 				case ChosenGameMode::Standard: {
 					if (actor->IsInCombat()) {
-						mod_target_scale(actor, Scale * (0.00008 + (GrowthRate * 0.17)));
+						mod_target_scale(actor, scale * (0.00008 + (growth_rate * 0.17)));
 					} else {
-						mod_target_scale(actor, Scale * -(0.00029 + (ShrinkRate * 0.34)));
+						mod_target_scale(actor, scale * -(0.00029 + (shrink_rate * 0.34)));
 					}
 				}
 			}
@@ -252,15 +228,15 @@ void GtsManager::poll() {
 	if (!this->enabled) {
 		return;
 	}
-	auto player_char = RE::PlayerCharacter::GetSingleton();
-	if (!player_char) {
+	auto *player_char = RE::PlayerCharacter::GetSingleton();
+	if (player_char == nullptr) {
 		return;
 	}
 	if (!player_char->Is3DLoaded()) {
 		return;
 	}
 
-	auto ui = RE::UI::GetSingleton();
+	auto *ui = RE::UI::GetSingleton();
 	if (!ui->GameIsPaused()) {
 		const auto& frame_config = Gts::Config::GetSingleton().GetFrame();
 		auto init_delay = frame_config.GetInitDelay();
@@ -289,12 +265,12 @@ void GtsManager::poll() {
 }
 
 // Fired during the Papyrus OnUpdate event
-void GtsManager::on_update() {
+void GtsManager::on_update() const {
 	if (!this->enabled) {
 		return;
 	}
-	auto player_char = RE::PlayerCharacter::GetSingleton();
-	if (!player_char) {
+	auto *player_char = RE::PlayerCharacter::GetSingleton();
+	if (player_char == nullptr) {
 		return;
 	}
 	if (!player_char->Is3DLoaded()) {
@@ -329,11 +305,11 @@ void GtsManager::reapply(bool force) {
 }
 void GtsManager::reapply_actor(Actor* actor, bool force) {
 	// Reapply just this actor
-	if (!actor) {
+	if (actor == nullptr) {
 		return;
 	}
 	if (!actor->Is3DLoaded()) {
 		return;
 	}
-	apply_actor(actor, force);
+	ApplyActor(actor, force);
 }

@@ -10,7 +10,7 @@ using namespace SKSE;
 namespace Gts {
 	inline static float* g_delta_time = (float*)REL::RelocationID(523660, 410199).address();
 
-	inline std::string_view actor_name(Actor* actor) {
+	inline std::string_view ActorName(Actor* actor) {
 		if (actor) {
 			auto ba = actor->GetActorBase();
 			if (ba) {
@@ -20,33 +20,33 @@ namespace Gts {
 		return "";
 	}
 
-	inline bool starts_with(std::string_view arg, std::string_view prefix) {
-		return arg.compare(0, prefix.size(), prefix);
+	inline bool StartsWith(std::string_view arg, std::string_view prefix) {
+		return arg.compare(0, prefix.size(), prefix) != 0;
 	}
 
-	inline bool matches(std::string_view str, std::string_view reg) {
+	inline bool Matches(std::string_view str, std::string_view reg) {
 		std::regex the_regex(std::string(reg).c_str());
 		return std::regex_match(std::string(str), the_regex);
 	}
 
-	vector<Actor*> find_actors();
-	vector<Actor*> find_actors_high();
-	vector<Actor*> find_actors_middle_high();
-	vector<Actor*> find_actors_middle_low();
-	vector<Actor*> find_actors_low();
+	vector<Actor*> FindActors();
+	vector<Actor*> FindActorsHigh();
+	vector<Actor*> FindActorsMiddleHigh();
+	vector<Actor*> FindActorsMiddleLow();
+	vector<Actor*> FindActorsLow();
 
-	float unit_to_meter(const float& unit);
-	float meter_to_unit(const float& meter);
-	NiPoint3 unit_to_meter(const NiPoint3& unit);
-	NiPoint3 meter_to_unit(const NiPoint3& meter);
-	void critically_damped(
+	float UnitToMeter(const float& unit);
+	float MeterToUnit(const float& meter);
+	NiPoint3 UnitToMeter(const NiPoint3& unit);
+	NiPoint3 MeterToUnit(const NiPoint3& meter);
+	void CriticallyDamped(
 		float& x,
 		float& v,
 		float x_goal,
 		float halflife,
 		float dt);
 
-	inline bool logit(Actor* actor) {
+	inline bool Logit(Actor* actor) {
 		return (actor->formID == 0x14 || actor->IsPlayerTeammate());
 	}
 
@@ -58,22 +58,22 @@ namespace Gts {
 		float a;
 	};
 	// https://www.desmos.com/calculator/lnooldbscf
-	inline float soft_power(const float x, const float k,const float n,const float s,const float o,const float a) {
+	inline float SoftPower(const float x, const float k,const float n,const float s,const float o,const float a) {
 		return pow(1.0+pow(k*(x-o),n*s),1.0/s) + a;
 	}
 	// https://www.desmos.com/calculator/pcoyowf7hn
-	inline float soft_core(const float x, const float k, const float n, const float s, const float o, const float a) {
-		return 1.0/soft_power(x, k, n, s, o, 0.0) + a;
+	inline float SoftCore(const float x, const float k, const float n, const float s, const float o, const float a) {
+		return 1.0/SoftPower(x, k, n, s, o, 0.0) + a;
 	}
-	inline float soft_core(const float x, const SoftPotential& soft_potential) {
-		return soft_core(x, soft_potential.k, soft_potential.n, soft_potential.s, soft_potential.o, soft_potential.a);
+	inline float SoftCore(const float x, const SoftPotential& soft_potential) {
+		return SoftCore(x, soft_potential.k, soft_potential.n, soft_potential.s, soft_potential.o, soft_potential.a);
 	}
-	inline float soft_power(const float x, const SoftPotential& soft_potential) {
-		return soft_power(x, soft_potential.k, soft_potential.n, soft_potential.s, soft_potential.o, soft_potential.a);
+	inline float SoftPower(const float x, const SoftPotential& soft_potential) {
+		return SoftPower(x, soft_potential.k, soft_potential.n, soft_potential.s, soft_potential.o, soft_potential.a);
 	}
 
 	// https://en.wikipedia.org/wiki/Smoothstep
-	inline float clamp(float lowerlimit, float upperlimit, float x) {
+	inline float Clamp(float lowerlimit, float upperlimit, float x) {
 		if (x < lowerlimit) {
 			x = lowerlimit;
 		}
@@ -82,21 +82,21 @@ namespace Gts {
 		}
 		return x;
 	}
-	inline float smootherstep(float edge0, float edge1, float x) {
+	inline float Smootherstep(float edge0, float edge1, float x) {
 		// Scale, and clamp x to 0..1 range
-		x = clamp(0.0, 1.0, (x - edge0) / (edge1 - edge0));
+		x = Clamp(0.0, 1.0, (x - edge0) / (edge1 - edge0));
 		// Evaluate polynomial
 		return x * x * x * (x * (x * 6 - 15) + 10);
 	}
-	inline float smoothstep (float edge0, float edge1, float x) {
+	inline float Smoothstep (float edge0, float edge1, float x) {
 		// Scale/bias into [0..1] range
-		x = clamp(0.0, 1.0, (x - edge0) / (edge1 - edge0));
+		x = Clamp(0.0, 1.0, (x - edge0) / (edge1 - edge0));
 
 		return x * x * (3 - 2 * x);
 	}
 
-	inline void shake_camera(TESObjectREFR* actor, float intensity, float duration) {
-		const auto skyrimVM = RE::SkyrimVM::GetSingleton();
+	inline void ShakeCamera(TESObjectREFR* actor, float intensity, float duration) {
+		const auto skyrim_vm = RE::SkyrimVM::GetSingleton();
 		auto vm = skyrimVM ? skyrimVM->impl : nullptr;
 		if (vm) {
 			RE::BSTSmartPointer<RE::BSScript::IStackCallbackFunctor> callback;
@@ -105,8 +105,8 @@ namespace Gts {
 		}
 	}
 
-	inline void shake_controller(float left_intensity, float right_intensity, float duration) {
-		const auto skyrimVM = RE::SkyrimVM::GetSingleton();
+	inline void ShakeController(float left_intensity, float right_intensity, float duration) {
+		const auto skyrim_vm = RE::SkyrimVM::GetSingleton();
 		auto vm = skyrimVM ? skyrimVM->impl : nullptr;
 		if (vm) {
 			RE::BSTSmartPointer<RE::BSScript::IStackCallbackFunctor> callback;
@@ -115,7 +115,7 @@ namespace Gts {
 		}
 	}
 
-	inline float get_distance_to_camera(const NiPoint3& point) {
+	inline float GetDistanceToCamera(const NiPoint3& point) {
 		auto camera = PlayerCamera::GetSingleton();
 		if (camera) {
 			auto point_a = point;
@@ -126,31 +126,31 @@ namespace Gts {
 		return 3.4028237E38; // Max float
 	}
 
-	inline float get_distance_to_camera(NiAVObject* node) {
+	inline float GetDistanceToCamera(NiAVObject* node) {
 		if (node) {
 			return get_distance_to_camera(node->world.translate);
 		}
 		return 3.4028237E38; // Max float
 	}
 
-	inline float get_distance_to_camera(Actor* actor) {
+	inline float GetDistanceToCamera(Actor* actor) {
 		if (actor) {
 			return get_distance_to_camera(actor->GetPosition());
 		}
 		return 3.4028237E38; // Max float
 	}
 
-	[[nodiscard]] std::atomic_bool& get_main_thread();
+	[[nodiscard]] std::atomic_bool& GetMainThread();
 
-	inline bool on_mainthread() {
-		return get_main_thread().load();
+	inline bool OnMainthread() {
+		return GetMainThread().load();
 	}
 
-	inline void activate_mainthread_mode() {
-		get_main_thread().store(true);
+	inline void ActivateMainthreadMode() {
+		GetMainThread().store(true);
 	}
-	inline void deactivate_mainthread_mode() {
-		get_main_thread().store(false);
+	inline void DeactivateMainthreadMode() {
+		GetMainThread().store(false);
 	}
 
 	inline bool IsJumping(Actor* actor) {
@@ -163,25 +163,25 @@ namespace Gts {
 	}
 
 	inline float GetStaminaPercentage(Actor* actor) {
-		auto baseValue = actor->GetPermanentActorValue(ActorValue::kStamina);
-		auto valueMod = actor->staminaModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
-		auto currentValue = actor->GetActorValue(ActorValue::kStamina);
+		auto base_value = actor->GetPermanentActorValue(ActorValue::kStamina);
+		auto value_mod = actor->staminaModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
+		auto current_value = actor->GetActorValue(ActorValue::kStamina);
 
 		return currentValue / (baseValue + valueMod);
 	}
 
 	inline float GetHealthPercentage(Actor* actor) {
-		auto baseValue = actor->GetPermanentActorValue(ActorValue::kHealth);
-		auto valueMod = actor->healthModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
-		auto currentValue = actor->GetActorValue(ActorValue::kHealth);
+		auto base_value = actor->GetPermanentActorValue(ActorValue::kHealth);
+		auto value_mod = actor->healthModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
+		auto current_value = actor->GetActorValue(ActorValue::kHealth);
 
 		return currentValue / (baseValue + valueMod);
 	}
 
 	inline float GetMagikaPercentage(Actor* actor) {
-		auto baseValue = actor->GetPermanentActorValue(ActorValue::kMagicka);
-		auto valueMod = actor->magickaModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
-		auto currentValue = actor->GetActorValue(ActorValue::kMagicka);
+		auto base_value = actor->GetPermanentActorValue(ActorValue::kMagicka);
+		auto value_mod = actor->magickaModifiers.modifiers[ACTOR_VALUE_MODIFIERS::kTemporary];
+		auto current_value = actor->GetActorValue(ActorValue::kMagicka);
 
 		return currentValue / (baseValue + valueMod);
 	}

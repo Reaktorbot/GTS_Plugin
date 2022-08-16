@@ -13,7 +13,7 @@ using namespace RE;
 using namespace Gts;
 
 namespace {
-	Foot get_foot_kind(Actor* actor, std::string_view tag) {
+	Foot GetFootKind(Actor* actor, std::string_view tag) {
 		Foot foot_kind = Foot::Unknown;
 		bool is_jumping = actor ? IsJumping(actor) : false;
 		bool in_air = actor ? actor->IsInMidair() : false;
@@ -31,7 +31,7 @@ namespace {
 		return foot_kind;
 	}
 
-	std::vector<NiAVObject*> get_landing_nodes(Actor* actor, const Foot& foot_kind) {
+	std::vector<NiAVObject*> GetLandingNodes(Actor* actor, const Foot& foot_kind) {
 		std::vector<NiAVObject*> results;
 		const std::string_view left_foot = ".*(L.*Foot|L.*Leg.*Tip).*";
 		const std::string_view right_foot = ".*(R.*Foot|R.*Leg.*Tip).*";
@@ -76,7 +76,7 @@ namespace Gts {
 		return instance;
 	}
 
-	void ImpactManager::HookProcessEvent(BGSImpactManager* impact, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_eventSource) {
+	static void ImpactManager::HookProcessEvent(BGSImpactManager* impact, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_event_source) {
 		if (a_event) {
 			auto actor = a_event->actor.get().get();
 			if (actor) {

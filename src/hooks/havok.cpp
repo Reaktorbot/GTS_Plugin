@@ -39,7 +39,7 @@ namespace Hooks
 		ContactManager::GetSingleton().Update();
 	}
 
-	Hook_Havok::CollisionFilterComparisonResult Hook_Havok::CompareFilterInfo(RE::bhkCollisionFilter* a_collisionFilter, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static Hook_Havok::CollisionFilterComparisonResult Hook_Havok::CompareFilterInfo(RE::bhkCollisionFilter* a_collision_filter, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		// COL_LAYER layerA = static_cast<COL_LAYER>(a_filterInfoA & 0x7f);
 		// COL_LAYER layerB = static_cast<COL_LAYER>(a_filterInfoB & 0x7f);
@@ -57,7 +57,7 @@ namespace Hooks
 
 		return CollisionFilterComparisonResult::Continue;
 	}
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo1(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo1(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -70,7 +70,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo2(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo2(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -83,7 +83,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo3(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo3(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -96,7 +96,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo4(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo4(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -109,7 +109,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo5(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo5(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -122,7 +122,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo6(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo6(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:
@@ -135,7 +135,7 @@ namespace Hooks
 		}
 	}
 
-	bool Hook_Havok::bhkCollisionFilter_CompareFilterInfo7(RE::bhkCollisionFilter* a_this, uint32_t a_filterInfoA, uint32_t a_filterInfoB)
+	static bool Hook_Havok::BhkCollisionFilterCompareFilterInfo7(RE::bhkCollisionFilter* a_this, uint32_t a_filter_info_a, uint32_t a_filter_info_b)
 	{
 		switch (CompareFilterInfo(a_this, a_filterInfoA, a_filterInfoB)) {
 			case CollisionFilterComparisonResult::Continue:

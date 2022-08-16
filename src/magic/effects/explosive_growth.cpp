@@ -17,7 +17,7 @@ namespace Gts {
 		}
 	}
 
-	bool ExplosiveGrowth::StartEffect(EffectSetting* effect) {
+	static bool ExplosiveGrowth::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return (effect == runtime.explosiveGrowth1 || effect == runtime.explosiveGrowth2 || effect == runtime.explosiveGrowth3);
 	}
@@ -33,12 +33,12 @@ namespace Gts {
 		float one = 2.0;
 		float two = 3.0;
 		float three = 4.0;
-		float GrowthTick = 120.0;
-		float BonusGrowth = 1.0;
+		float growth_tick = 120.0;
+		float bonus_growth = 1.0;
 		float progression_multiplier = runtime.ProgressionMultiplier->value;
 
 
-		BSSoundHandle GrowthSound = BSSoundHandle::BSSoundHandle();
+		BSSoundHandle growth_sound = BSSoundHandle::BSSoundHandle();
 		auto audio_manager = BSAudioManager::GetSingleton();
 		BSISoundDescriptor* sound_descriptor = runtime.growthSound;;
 		audio_manager->BuildSoundDataFromDescriptor(GrowthSound, sound_descriptor);
@@ -48,7 +48,7 @@ namespace Gts {
 			one = 6.0;
 			two = 8.0;
 			three = 12.0;
-			BonusGrowth = 2.0;
+			bonus_growth = 2.0;
 		} else if (caster->HasPerk(runtime.ExtraGrowth)) {
 			one = 4.0;
 			two = 6.0;

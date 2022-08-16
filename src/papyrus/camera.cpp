@@ -8,59 +8,59 @@ using namespace RE;
 using namespace RE::BSScript;
 
 namespace {
-	constexpr std::string_view PapyrusClass = "GtsCamera";
+	constexpr std::string_view papyrus_class = "GtsCamera";
 
-	void SetEnableCollisionActor(StaticFunctionTag*, bool enabled) {
+	void SetEnableCollisionActor(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().camera_collisions.enable_actor = enabled;
 	}
 
-	bool GetEnableCollisionActor(StaticFunctionTag*) {
+	bool GetEnableCollisionActor(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.enable_actor;
 	}
 
-	void SetEnableCollisionTree(StaticFunctionTag*, bool enabled) {
+	void SetEnableCollisionTree(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().camera_collisions.enable_trees = enabled;
 	}
 
-	bool GetEnableCollisionTree(StaticFunctionTag*) {
+	bool GetEnableCollisionTree(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.enable_trees;
 	}
 
-	void SetEnableCollisionDebris(StaticFunctionTag*, bool enabled) {
+	void SetEnableCollisionDebris(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().camera_collisions.enable_debris = enabled;
 	}
 
-	bool GetEnableCollisionDebris(StaticFunctionTag*) {
+	bool GetEnableCollisionDebris(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.enable_debris;
 	}
 
-	void SetEnableCollisionTerrain(StaticFunctionTag*, bool enabled) {
+	void SetEnableCollisionTerrain(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().camera_collisions.enable_terrain = enabled;
 	}
 
-	bool GetEnableCollisionTerrain(StaticFunctionTag*) {
+	bool GetEnableCollisionTerrain(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.enable_terrain;
 	}
 
-	void SetEnableCollisionStatic(StaticFunctionTag*, bool enabled) {
+	void SetEnableCollisionStatic(StaticFunctionTag* /*unused*/, bool enabled) {
 		Persistent::GetSingleton().camera_collisions.enable_static = enabled;
 	}
 
-	bool GetEnableCollisionStatic(StaticFunctionTag*) {
+	bool GetEnableCollisionStatic(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.enable_static;
 	}
 
-	void SetCollisionScale(StaticFunctionTag*, float scale) {
+	void SetCollisionScale(StaticFunctionTag* /*unused*/, float scale) {
 		Persistent::GetSingleton().camera_collisions.above_scale = scale;
 	}
 
-	float GetCollisionScale(StaticFunctionTag*) {
+	float GetCollisionScale(StaticFunctionTag* /*unused*/) {
 		return Persistent::GetSingleton().camera_collisions.above_scale;
 	}
 }
 
 namespace Gts {
-	bool register_papyrus_camera(IVirtualMachine* vm) {
+	bool RegisterPapyrusCamera(IVirtualMachine* vm) {
 		vm->RegisterFunction("SetEnableCollisionActor", PapyrusClass, SetEnableCollisionActor);
 		vm->RegisterFunction("GetEnableCollisionActor", PapyrusClass, GetEnableCollisionActor);
 		vm->RegisterFunction("SetEnableCollisionTree", PapyrusClass, SetEnableCollisionTree);

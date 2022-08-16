@@ -120,7 +120,7 @@ namespace Gts {
 		return instance;
 	}
 
-	void MagicManager::ProcessActiveEffects(Actor* actor) {
+	static void MagicManager::ProcessActiveEffects(Actor* actor) {
 		auto& runtime = Runtime::GetSingleton();
 
 		auto effect_list =actor->GetActiveEffectList();

@@ -1,4 +1,4 @@
-#include "hooks/PlayerCharacter.hpp"
+#include "hooks/playercharacter.hpp"
 #include "util.hpp"
 #include "managers/GtsManager.hpp"
 #include "data/persistent.hpp"
@@ -11,7 +11,7 @@ namespace Hooks
 {
 	void Hook_Player::Hook() {
 		logger::info("Hooking PlayerCharacter");
-		REL::Relocation<std::uintptr_t> PlayerCharacterVtbl{ RE::VTABLE_PlayerCharacter[0] };
+		REL::Relocation<std::uintptr_t> player_character_vtbl{ RE::VTABLE_PlayerCharacter[0] };
 
 		_UpdateAnimation = PlayerCharacterVtbl.write_vfunc(0x7D, UpdateAnimation);
 
@@ -21,7 +21,7 @@ namespace Hooks
 		_GetWalkSpeed = PlayerCharacterVtbl.write_vfunc(REL::Relocate(0x0EE, 0x0EE, 0x0F0), GetWalkSpeed);
 	}
 
-	void Hook_Player::UpdateAnimation(RE::PlayerCharacter* a_this, float a_delta) {
+	static void Hook_Player::UpdateAnimation(RE::PlayerCharacter* a_this, float a_delta) {
 		float anim_speed = 1.0;
 		if (Gts::GtsManager::GetSingleton().enabled) {
 			auto saved_data = Gts::Persistent::GetSingleton().GetData(a_this);
@@ -34,22 +34,22 @@ namespace Hooks
 		_UpdateAnimation(a_this, a_delta * anim_speed);
 	}
 
-	float Hook_Player::GetRunSpeed(RE::Character* a_this) {
+	static float Hook_Player::GetRunSpeed(RE::Character* a_this) {
 		float value = _GetRunSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Player::GetJogSpeed(RE::Character* a_this) {
+	static float Hook_Player::GetJogSpeed(RE::Character* a_this) {
 		float value = _GetJogSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Player::GetFastWalkSpeed(RE::Character* a_this) {
+	static float Hook_Player::GetFastWalkSpeed(RE::Character* a_this) {
 		float value = _GetFastWalkSpeed(a_this);
 		return value;
 	}
 
-	float Hook_Player::GetWalkSpeed(RE::Character* a_this) {
+	static float Hook_Player::GetWalkSpeed(RE::Character* a_this) {
 		float value = _GetWalkSpeed(a_this);
 		return value;
 	}

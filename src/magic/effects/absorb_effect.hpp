@@ -16,6 +16,6 @@ namespace Gts {
 
 			static bool StartEffect(EffectSetting* effect);
 		private:
-			bool true_absorb = false;
+			bool _true_absorb = false;
 	};
 }

@@ -6,13 +6,13 @@ using namespace SKSE;
 
 namespace Hooks
 {
-	class Hook_BGSImpactManager
+	class HookBgsImpactManager
 	{
 		public:
 			static void Hook();
 		private:
 
-			static BSEventNotifyControl ProcessEvent(BGSImpactManager* a_this, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_eventSource);
-			static inline REL::Relocation<decltype(ProcessEvent)> _ProcessEvent;
+			static BSEventNotifyControl ProcessEvent(Hook_BGSImpactManager* a_this, const BGSFootstepEvent* a_event, BSTEventSource<BGSFootstepEvent>* a_eventSource);
+			static inline REL::Relocation<decltype(ProcessEvent)> process_event;
 	};
 }

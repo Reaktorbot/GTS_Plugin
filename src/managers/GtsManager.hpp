@@ -28,12 +28,12 @@ namespace Gts {
 			bool enabled = false;
 			float experiment = 1.0;
 
-			void poll();
+			void Poll();
 
-			void on_update();
+			void OnUpdate() const;
 
 			// Reapply changes (used after reload events)
-			void reapply(bool force = true);
-			void reapply_actor(Actor* actor, bool force = true);
+			static void Reapply(bool force = true);
+			static void ReapplyActor(Actor* actor, bool force = true);
 	};
 }

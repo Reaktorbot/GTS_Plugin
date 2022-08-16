@@ -5,7 +5,7 @@
 #include "data/runtime.hpp"
 
 namespace Gts {
-	bool ShrinkOther::StartEffect(EffectSetting* effect) {
+	static bool ShrinkOther::StartEffect(EffectSetting* effect) {
 		auto& runtime = Runtime::GetSingleton();
 		return effect == runtime.ShrinkAlly;
 	}
@@ -21,20 +21,20 @@ namespace Gts {
 		}
 
 		auto& runtime = Runtime::GetSingleton();
-		float ProgressionMultiplier = runtime.ProgressionMultiplier->value;
-		float CrushGrowthRate = runtime.CrushGrowthRate->value;
-		float casterScale = get_visual_scale(caster);
-		float targetScale = get_visual_scale(target);
-		float GrowRate = 0.0;
-		float DualCast = 1.0;
+		float progression_multiplier = runtime.ProgressionMultiplier->value;
+		float crush_growth_rate = runtime.CrushGrowthRate->value;
+		float caster_scale = get_visual_scale(caster);
+		float target_scale = get_visual_scale(target);
+		float grow_rate = 0.0;
+		float dual_cast = 1.0;
 		if (IsDualCasting()) {
-			DualCast = 2.0;
+			dual_cast = 2.0;
 		}
-		if (CrushGrowthRate >= 1.4) {
-			GrowRate = 0.00090;
+		if (crush_growth_rate >= 1.4) {
+			grow_rate = 0.00090;
 		}
 
-		if (targetScale > 0.25) {
+		if (target_scale > 0.25) {
 			mod_target_scale(target, -(0.00180 + GrowRate) * (casterScale * 0.50 + 0.50) * targetScale * ProgressionMultiplier * DualCast);
 		}
 	}
