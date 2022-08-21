@@ -170,6 +170,10 @@ namespace Gts {
 	void CameraManager::Update() {
 		auto player = PlayerCharacter::GetSingleton();
 		auto& runtime = Runtime::GetSingleton();
+		auto& camera = TESCamera::GetSingleton();
+		float CameraCoord = camera->pos[0];
+		log::info("Camera 0: {}", CameraCoord);
+
 		bool ImProne = false;
 		float size = get_visual_scale(player);
 		float ScaleMethod = 0.0;
