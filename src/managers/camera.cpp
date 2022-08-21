@@ -173,7 +173,7 @@ namespace Gts {
 
 
 
-		auto& Camera = PlayerCamera::GetSingleton;
+		auto Camera = PlayerCamera::GetSingleton();
 		float CameraX = Camera->pos.x->value;
 		float CameraY = Camera->pos.y->value;
 		float CameraZ = Camera->pos.z->value;
