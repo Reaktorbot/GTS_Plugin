@@ -174,9 +174,9 @@ namespace Gts {
 
 
 		auto Camera = PlayerCamera::GetSingleton();
-		float CameraX = Camera->pos.x->value;
-		float CameraY = Camera->pos.y->value;
-		float CameraZ = Camera->pos.z->value;
+		float CameraX = Camera->pos.x;
+		float CameraY = Camera->pos.y;
+		float CameraZ = Camera->pos.z;
 		auto root_node = Camera->cameraRoot.get();
 		std::string name = root_node->name.c_str();
 		log::info("Camera X, Y, Z: {}, {}, {}", CameraX, CameraY, CameraZ);
