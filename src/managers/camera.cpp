@@ -170,10 +170,13 @@ namespace Gts {
 	void CameraManager::Update() {
 		auto player = PlayerCharacter::GetSingleton();
 		auto& runtime = Runtime::GetSingleton();
-		auto& camera = TESCamera::GetSingleton();
-		float CameraX = camera->pos.x->value;
-		float CameraY = camera->pos.y->value;
-		float CameraZ = camera->pos.z->value;
+
+
+
+		auto& Camera = TESCamera;
+		float CameraX = Camera->pos.x->value;
+		float CameraY = Camera->pos.y->value;
+		float CameraZ = Camera->pos.z->value;
 		auto root_node = Camera->cameraRoot.get();
 		std::string name = root_node->name.c_str();
 		log::info("Camera X, Y, Z: {}, {}, {}", CameraX, CameraY, CameraZ);
