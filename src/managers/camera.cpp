@@ -171,8 +171,13 @@ namespace Gts {
 		auto player = PlayerCharacter::GetSingleton();
 		auto& runtime = Runtime::GetSingleton();
 		auto& camera = TESCamera::GetSingleton();
-		float CameraCoord = camera->pos[0];
-		log::info("Camera 0: {}", CameraCoord);
+		float CameraX = camera->pos.x->value;
+		float CameraY = camera->pos.y->value;
+		float CameraZ = camera->pos.z->value;
+		auto root_node = Camera->cameraRoot.get();
+		std::string name = root_node->name.c_str();
+		log::info("Camera X, Y, Z: {}, {}, {}", CameraX, CameraY, CameraZ);
+		log::info("Camera Name {}", name);
 
 		bool ImProne = false;
 		float size = get_visual_scale(player);
