@@ -182,6 +182,11 @@ namespace Gts {
 		log::info("Camera X, Y, Z: {}, {}, {}", CameraX, CameraY, CameraZ);
 		log::info("Camera Name {}", name);
 
+		// EXPERIMENT
+		root_node->local.scale = get_visual_scale(player);
+		return;
+		// END EXPERIMENT
+
 		bool ImProne = false;
 		float size = get_visual_scale(player);
 		float ScaleMethod = 0.0;
