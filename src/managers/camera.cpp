@@ -180,7 +180,16 @@ namespace Gts {
 		auto root_node = Camera->cameraRoot.get();
 		std::string name = root_node->name.c_str();
 		log::info("Camera X, Y, Z: {}, {}, {}", CameraX, CameraY, CameraZ);
-		log::info("Camera Name {}", name);
+		log::info("Camera Node Name {}", name);
+		NiPoint3 camera_pos = root_node->local.translate;
+		log::info("Camera Root Position {},{},{}", camera_pos.x, camera_pos.y, camera_pos.z);
+		auto parent_node = root_node->parent;
+		if (parent_node) {
+			std::string parent_node_name = parent_node->name.c_str();
+			log::info("Camera Parent Node Name {}", parent_node_name);
+			NiPoint3 parent_camera_pos = parent_node->local.translate;
+			log::info("Camera Parent  Position {},{},{}", parent_camera_pos.x, parent_camera_pos.y, parent_camera_pos.z);
+		}
 
 		// EXPERIMENT
 		root_node->local.scale = get_visual_scale(player);
