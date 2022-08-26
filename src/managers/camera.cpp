@@ -11,7 +11,7 @@ using namespace Gts;
 
 namespace {
 	void SetINIFloat(std::string_view name, float value) {
-		auto ini_conf = INIPrefSettingCollection::GetSingleton();
+		auto ini_conf = INISettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
 			setting->data.f=value; // If float
@@ -19,7 +19,7 @@ namespace {
 		}
 	}
 	float GetINIFloat(std::string_view name) {
-		auto ini_conf = INIPrefSettingCollection::GetSingleton();
+		auto ini_conf = INISettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
 			return setting->data.f;
@@ -50,6 +50,7 @@ namespace Gts {
 			if (camera_state && player->IsWeaponDrawn() == false) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				third_person_state->posOffsetExpected.x = value;
+				log::info("Set Shoulder Pos X To: {}", third_person_state->posOffsetExpected.x)
 			}
 		}
 	}
@@ -70,6 +71,7 @@ namespace Gts {
 			if (camera_state && player->IsWeaponDrawn() == false) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				third_person_state->posOffsetExpected.y = value;
+				log::info("Set Shoulder Pos Y To: {}", third_person_state->posOffsetExpected.y)
 			}
 		}
 	}
@@ -89,6 +91,7 @@ namespace Gts {
 			if (camera_state && player->IsWeaponDrawn() == false) {
 				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
 				third_person_state->posOffsetExpected.z = value;
+				log::info("Set Shoulder Pos Z To: {}", third_person_state->posOffsetExpected.z)
 			}
 		}
 	}
@@ -249,20 +252,18 @@ namespace Gts {
 	void CameraManager::Update() {
 		auto player = PlayerCharacter::GetSingleton();
 		auto& runtime = Runtime::GetSingleton();
+
 		auto Camera = PlayerCamera::GetSingleton();
 		float CameraX = Camera->pos.x;
 		float CameraY = Camera->pos.y;
 		float CameraZ = Camera->pos.z;
-		auto root_node = Camera->cameraRoot.get();
-		// EXPERIMENT
-		root_node->local.scale = get_visual_scale(player);
-		// END EXPERIMENT
+
 
 		bool ImProne = false;
 		float size = get_visual_scale(player);
 		float ScaleMethod = 0.0;
 		SizeMethod method = Persistent::GetSingleton().size_method;
-
+		log::info("Applying Camera Update")
 		if (method == SizeMethod::ModelScale) {
 			ScaleMethod = 0.0;
 		} else if (method == SizeMethod::RootScale) {
@@ -321,7 +322,9 @@ namespace Gts {
 		if (FeetCamera >= 1.0) { // Adjustment for Feet Camera
 			SetfMouseWheelZoomIncrement(CameraZoomPrecision);
 			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2);
+			log::info("Feet Camera = 1.0")
 			if (player->IsSneaking() == true && ImProne == true) {
+				log::info("Prone Is True")
 				CameraManager::ApplyFeetCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			} else {
 				CameraManager::ApplyFeetCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
@@ -329,22 +332,25 @@ namespace Gts {
 		} else if (EnableAltCamera >= 1.0) { // Adjustment for Alternate Camera
 			SetfMouseWheelZoomIncrement(CameraZoomPrecision);
 			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2);
+			log::info("Alt Camera = 1.0")
 			if (player->IsSneaking() == true && ImProne == true) {
+				log::info("Prone Is True")
 				CameraManager::ApplyCameraSettings(size, proneCameraAlternateX, proneCameraAlternateY, proneCombatCameraAlternateX, proneCombatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			} else {
 				CameraManager::ApplyCameraSettings(size, cameraAlternateX, cameraAlternateY, combatCameraAlternateX, combatCameraAlternateY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			}
 		} else if (EnableCamera >= 1.0) { // Regular Camera
+		log::info("Regular Camera = 1.0")
 			SetfMouseWheelZoomIncrement(CameraZoomPrecision);
 			SetfMouseWheelZoomSpeed(CameraZoomSpeed/2);
 			if (player->IsSneaking() == true && ImProne == true) {
+				log::info("Prone Is True")
 				CameraManager::ApplyCameraSettings(size, proneCameraX, proneCameraY, proneCombatCameraX, proneCombatCameraY, MinDistance, MaxDistance,usingAutoDistance, ImProne);
 			} else {
 				CameraManager::ApplyCameraSettings(size, cameraX, cameraY, combatCameraX, combatCameraY, MinDistance, MaxDistance, usingAutoDistance, ImProne);
 			}
 
 		}
-
-		UpdateThirdPerson();
 	}
 }
+
