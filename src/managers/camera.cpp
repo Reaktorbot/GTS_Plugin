@@ -64,6 +64,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.x;
 			}
 		}
+		else
+		return 0
 	}
 
 	void CameraManager::SetfOverShoulderPosY(float value) {
@@ -89,6 +91,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.y;
 			}
 		}
+		else
+		return 0
 	}
 
 	void CameraManager::SetfOverShoulderPosZ(float value) {
@@ -113,6 +117,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.z;
 			}
 		}
+		else
+		return 0
 	}
 	
 
@@ -139,6 +145,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.x;
 			}
 		}
+		else
+		return 0
 	}
 	
 
@@ -152,6 +160,7 @@ namespace Gts {
 				third_person_state->posOffsetExpected.y = value;
 			}
 		}
+		
 	}
 	
 	float CameraManager::GetfOverShoulderCombatPosY() {
@@ -165,6 +174,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.y;
 			}
 		}
+		else
+		return 0
 	}
 
 	void CameraManager::SetfOverShoulderCombatPosZ(float value) {
@@ -190,6 +201,8 @@ namespace Gts {
 				return third_person_state->posOffsetExpected.z;
 			}
 		}
+		else
+		return 0
 	}
 
 	void CameraManager::SetfVanityModeMaxDist(float value) {
