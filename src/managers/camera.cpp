@@ -65,7 +65,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 
 	void CameraManager::SetfOverShoulderPosY(float value) {
@@ -92,7 +92,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 
 	void CameraManager::SetfOverShoulderPosZ(float value) {
@@ -118,7 +118,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 	
 
@@ -146,7 +146,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 	
 
@@ -175,7 +175,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 
 	void CameraManager::SetfOverShoulderCombatPosZ(float value) {
@@ -202,7 +202,7 @@ namespace Gts {
 			}
 		}
 		else
-		return 0
+		return 0;
 	}
 
 	void CameraManager::SetfVanityModeMaxDist(float value) {
