@@ -11,7 +11,7 @@ using namespace Gts;
 
 namespace {
 	void SetINIFloat(std::string_view name, float value) {
-		auto ini_conf = INIPrefSettingCollection::GetSingleton();
+		auto ini_conf = INISettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
 			setting->data.f=value; // If float
@@ -19,7 +19,7 @@ namespace {
 		}
 	}
 	float GetINIFloat(std::string_view name) {
-		auto ini_conf = INIPrefSettingCollection::GetSingleton();
+		auto ini_conf = INISettingCollection::GetSingleton();
 		Setting* setting = ini_conf->GetSetting(name);
 		if (setting) {
 			return setting->data.f;
