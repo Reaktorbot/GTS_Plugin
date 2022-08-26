@@ -56,16 +56,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderPosX() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn() == false) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.x;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.x;
 	}
 
 	void CameraManager::SetfOverShoulderPosY(float value) {
@@ -83,16 +76,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderPosY() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn() == false) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.y;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.y;
 	}
 
 	void CameraManager::SetfOverShoulderPosZ(float value) {
@@ -109,16 +95,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderPosZ() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn() == false) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.z;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.z;
 	}
 	
 
@@ -137,16 +116,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderCombatPosX() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn()) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.x;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.x;
 	}
 	
 
@@ -166,16 +138,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderCombatPosY() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn()) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.y;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.y;
 	}
 
 	void CameraManager::SetfOverShoulderCombatPosZ(float value) {
@@ -193,16 +158,9 @@ namespace Gts {
 	float CameraManager::GetfOverShoulderCombatPosZ() {
 		auto camera = PlayerCamera::GetSingleton();
 		auto player = PlayerCharacter::GetSingleton();
-		if (camera)
-		{
-			TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
-			if (camera_state && player->IsWeaponDrawn()) {
-				ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
-				return third_person_state->posOffsetExpected.z;
-			}
-		}
-		else
-		return 0;
+		TESCameraState* camera_state = camera->cameraStates[CameraStates::kThirdPerson].get();
+		ThirdPersonState* third_person_state = static_cast<ThirdPersonState*>(camera_state);
+		return third_person_state->posOffsetExpected.z;
 	}
 
 	void CameraManager::SetfVanityModeMaxDist(float value) {
