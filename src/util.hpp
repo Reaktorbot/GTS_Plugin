@@ -47,12 +47,6 @@ namespace Gts {
 	float meter_to_unit(const float& meter);
 	NiPoint3 unit_to_meter(const NiPoint3& unit);
 	NiPoint3 meter_to_unit(const NiPoint3& meter);
-	void critically_damped(
-		float& x,
-		float& v,
-		float x_goal,
-		float halflife,
-		float dt);
 
 	inline bool logit(Actor* actor) {
 		return (actor->formID == 0x14 || actor->IsPlayerTeammate());
