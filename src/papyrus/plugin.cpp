@@ -1,5 +1,6 @@
 #include "papyrus/plugin.hpp"
 #include "data/persistent.hpp"
+#include "managers/highheel.hpp"
 #include "managers/GtsManager.hpp"
 #include "util.hpp"
 #include <math.h>
@@ -68,11 +69,11 @@ namespace {
 	}
 
 	bool GetIsHighHeelEnabled(StaticFunctionTag*) {
-		return Persistent::GetSingleton().highheel_correction;
+		return HighHeelManager::GetSingleton().highheel_correction;
 	}
 
 	void SetIsHighHeelEnabled(StaticFunctionTag*, bool enabled) {
-		Persistent::GetSingleton().highheel_correction = enabled;
+		HighHeelManager::GetSingleton().highheel_correction = enabled;
 	}
 
 	bool GetIsSpeedAdjusted(StaticFunctionTag*) {
@@ -107,7 +108,9 @@ namespace {
 	}
 
 	bool IsInAir(StaticFunctionTag*, Actor* actor) {
-		if (!actor) return false;
+		if (!actor) {
+			return false;
+		}
 		return actor->IsInMidair();
 	}
 

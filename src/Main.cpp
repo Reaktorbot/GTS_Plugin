@@ -16,6 +16,7 @@
 #include "managers/reloader.hpp"
 #include "managers/camera.hpp"
 #include "managers/hitmanager.hpp"
+#include "managers/tremor.hpp"
 #include "data/runtime.hpp"
 #include "data/persistent.hpp"
 #include "data/transient.hpp"
@@ -123,7 +124,7 @@ namespace {
 						break;
 					case MessagingInterface::kNewGame: // Player starts a new game from main menu.
 						{
-							Plugin::SetInGame(false);
+							Plugin::SetInGame(true);
 							EventDispatcher::DoReset();
 						}
 						break;
@@ -165,6 +166,8 @@ void InitializePapyrus() {
 }
 
 void InitializeEventSystem() {
+	EventDispatcher::AddListener(&Plugin::GetSingleton()); // Stores data that effects whole plugin
+
 	EventDispatcher::AddListener(&Runtime::GetSingleton()); // Stores spells, globals and other important data
 	EventDispatcher::AddListener(&Persistent::GetSingleton());
 	EventDispatcher::AddListener(&Transient::GetSingleton());
@@ -172,6 +175,7 @@ void InitializeEventSystem() {
 	EventDispatcher::AddListener(&GtsManager::GetSingleton()); // Manages Game Mode, smooth size increase and animation & movement speed
 	EventDispatcher::AddListener(&SizeManager::GetSingleton()); // Manages Max Scale of everyone
 	EventDispatcher::AddListener(&HighHeelManager::GetSingleton()); // Applies high heels
+	EventDispatcher::AddListener(&SpeedManager::GetSingleton()); // Applies movement and anim speed adjustments
 	EventDispatcher::AddListener(&CameraManager::GetSingleton()); // Edits the camera
 	EventDispatcher::AddListener(&ReloadManager::GetSingleton()); // Handles Skyrim Events
 
@@ -183,6 +187,7 @@ void InitializeEventSystem() {
 	EventDispatcher::AddListener(&HitManager::GetSingleton()); // Hit Manager for handleing papyrus hit events
 
 	EventDispatcher::AddListener(&ContactManager::GetSingleton()); // Manages collisions
+	EventDispatcher::AddListener(&TremorManager::GetSingleton()); // Manages tremors (camera shakes on walk)
 	EventDispatcher::AddListener(&InputManager::GetSingleton()); // Manages keyboard and mouse input
 }
 

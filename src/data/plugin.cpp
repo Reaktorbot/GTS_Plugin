@@ -27,4 +27,13 @@ namespace Gts {
 		static Plugin instance;
 		return instance;
 	}
+
+	void Plugin::DataReady() {
+		Plugin::RegisterForSerde("PLUG", this);
+	}
+
+	void Plugin::ser(SerializationInterface* serde, int version) {
+	}
+	void Plugin::de(SerializationInterface* serde, int version) {
+	}
 }

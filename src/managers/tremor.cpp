@@ -41,9 +41,9 @@ namespace Gts {
 
 		float tremor_scale;
 		if (actor->formID == 0x14) {
-			tremor_scale = Persistent::GetSingleton().tremor_scale * (0.965 + get_visual_scale(actor) * 0.035);
+			tremor_scale = this->.tremor_scale * (0.965 + get_visual_scale(actor) * 0.035);
 		} else {
-			tremor_scale = Persistent::GetSingleton().npc_tremor_scale * (0.95 + get_visual_scale(actor) * 0.05);
+			tremor_scale = this->npc_tremor_scale * (0.95 + get_visual_scale(actor) * 0.05);
 		}
 
 		if (tremor_scale < 1e-5) {
@@ -213,5 +213,18 @@ namespace Gts {
 				}
 			}
 		}
+
+		void TremorManager::DataReady() {
+			Persistent::RegisterForSerde('TREM', this);
+		}
+		void TremorManager::ser(SerializationInterface* serde, int version) {
+			serde->WriteRecordData(&this->tremor_scale, sizeof(this->tremor_scale));
+			serde->WriteRecordData(&this->npc_tremor_scale, sizeof(this->npc_tremor_scale));
+		}
+		void TremorManager::de(SerializationInterface* serde, int version) {
+			serde->ReadRecordData(&this->tremor_scale, sizeof(this->tremor_scale));
+			serde->ReadRecordData(&this->npc_tremor_scale, sizeof(this->npc_tremor_scale));
+		}
+
 	}
 }

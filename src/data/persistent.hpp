@@ -4,6 +4,7 @@
 #include "events.hpp"
 #include "scale/modscale.hpp"
 #include "util.hpp"
+#include "data/serde.hpp"
 
 using namespace std;
 using namespace SKSE;
@@ -49,30 +50,13 @@ namespace Gts {
 			static void OnGameSaved(SKSE::SerializationInterface* serde);
 			static void OnGameLoaded(SKSE::SerializationInterface* serde);
 
+			static void RegisterForSerde(long tag, Serde* callback);
+
 			ActorData* GetActorData(Actor* actor);
 			ActorData* GetData(TESObjectREFR* refr);
 
+			std::unordered_map<long, Serde*> serde_registry;
 
-
-			bool highheel_correction = true;
-			bool is_speed_adjusted = true;
-			float tremor_scale = 1.0;
-			float npc_tremor_scale = 1.0;
-			SoftPotential speed_adjustment {
-				.k = 0.125, // 0.125
-				.n = 0.86, // 0.86
-				.s = 1.12, // 1.12
-				.o = 1.0,
-				.a = 0.0,  //Default is 0
-			};
-			SoftPotential MS_adjustment {
-				.k = 0.132, // 0.132
-				.n = 0.86, // 0.86
-				.s = 1.12, // 1.12
-				.o = 1.0,
-				.a = 0.0, //Default is 0
-			};
-			SizeMethod size_method = SizeMethod::ModelScale;
 			CameraCollisions camera_collisions;
 		private:
 			Persistent() = default;

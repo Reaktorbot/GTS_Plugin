@@ -33,6 +33,10 @@ namespace Gts {
 		GetSingleton().Reset();
 	}
 
+	static RegisterForSerde(long tag, Serde* callback) {
+		this->serde_registry.try_emplace(tag, callback);
+	}
+
 	void Persistent::OnGameLoaded(SerializationInterface* serde) {
 		std::uint32_t type;
 		std::uint32_t size;

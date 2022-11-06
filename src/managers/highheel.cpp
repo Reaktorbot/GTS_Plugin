@@ -8,6 +8,7 @@
 
 using namespace RE;
 using namespace Gts;
+using namespace SKSE;
 
 namespace Gts {
 	HighHeelManager& HighHeelManager::GetSingleton() noexcept {
@@ -15,12 +16,22 @@ namespace Gts {
 		return instance;
 	}
 
+	void HighHeelManager::DataReady() {
+		Persistent::RegisterForSerde("HHMA", this);
+	}
 	void HighHeelManager::PapyrusUpdate() {
 		const bool FORCE_APPLY = false;
 		auto actors = find_actors();
 		for (auto actor: actors) {
 			//ApplyHH(actor, FORCE_APPLY);
 		}
+	}
+
+	void HighHeelManager::ser(SerializationInterface* serde, int version) {
+		serde->WriteRecordData(&this->highheel_correction, sizeof(this->highheel_correction));
+	}
+	void HighHeelManager::de(SerializationInterface* serde, int version) {
+		serde->ReadRecordData(&this->highheel_correction, sizeof(this->highheel_correction));
 	}
 
 	void HighHeelManager::ActorEquip(Actor* actor) {
@@ -103,9 +114,8 @@ namespace Gts {
 					shoe_weight = shoe->weight/10;
 				}
 				Runtime::GetSingleton().HighHeelDamage->value = 1.5 + shoe_weight + char_weight; // This Global modification is needed to apply damage boost to scripts.
-				// Feel free to remove it once we move it to DLL completely ^ 
-			}
-			else if (actor->formID == 0x14 && base_hh <= 0) {
+				// Feel free to remove it once we move it to DLL completely ^
+			} else if (actor->formID == 0x14 && base_hh <= 0) {
 				Runtime::GetSingleton().HighHeelDamage->value = 1.0;
 			}
 		}

@@ -7,7 +7,7 @@ using namespace RE;
 using namespace SKSE;
 
 namespace Gts {
-	class Plugin {
+	class Plugin : public EventListener, public Serde {
 		public:
 			static bool Enabled();
 			static bool InGame();
@@ -15,6 +15,10 @@ namespace Gts {
 			static bool OnMainThread();
 			static void SetOnMainThread(bool value);
 
+			virtual void DataReady() override;
+
+			virtual void ser(SerializationInterface* serde, int version) override;
+			virtual void de(SerializationInterface* serde, int version) override;
 
 		private:
 			[[nodiscard]] static Plugin& GetSingleton();

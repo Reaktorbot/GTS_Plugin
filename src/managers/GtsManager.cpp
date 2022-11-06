@@ -114,97 +114,6 @@ namespace {
 
 
 
-	void apply_speed(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data, bool force = false) {
-		if (!Persistent::GetSingleton().is_speed_adjusted) {
-			return;
-		}
-		if (!actor) {
-			return;
-		}
-		if (!actor->Is3DLoaded()) {
-			return;
-		}
-		if (!trans_actor_data) {
-			return;
-		}
-		if (!persi_actor_data) {
-			return;
-		}
-
-		float scale = persi_actor_data->visual_scale;
-		if (scale < 1e-5) {
-			//log::info("!SCALE IS < 1e-5! {}", actor->GetDisplayFullName());
-			return;
-		}
-		SoftPotential& speed_adjustment = Persistent::GetSingleton().speed_adjustment;
-		SoftPotential& MS_adjustment = Persistent::GetSingleton().MS_adjustment;
-		float speed_mult = soft_core(scale, speed_adjustment);
-		float MS_mult = soft_core(scale, MS_adjustment);
-		float Bonus = Persistent::GetSingleton().GetActorData(actor)->smt_run_speed;
-		float MS_mult_sprint_limit = clamp(0.65, 1.0, MS_mult); // For sprint
-		float MS_mult_limit = clamp(0.750, 1.0, MS_mult); // For Walk speed
-		float Multy = clamp(0.70, 1.0, MS_mult); // Additional 30% ms
-		float WalkSpeedLimit = clamp(0.33, 1.0, MS_mult);
-		float PerkSpeed = 1.0;
-
-		static Timer timer = Timer(0.10); // Run every 0.10s or as soon as we can
-		float IsFalling = Runtime::GetSingleton().IsFalling->value;
-
-		if (actor->formID == 0x14 && IsJumping(actor) && IsFalling == 0.0) {
-				Runtime::GetSingleton().IsFalling->value = 1.0;
-		}
-		else if (actor->formID == 0x14 && !IsJumping(actor) && IsFalling >= 1.0) {
-				Runtime::GetSingleton().IsFalling->value = 0.0;
-		}
-		if (actor->HasPerk(Runtime::GetSingleton().BonusSpeedPerk))
-			{
-				PerkSpeed = clamp(0.85, 1.0, MS_mult); // Used as a bonus 15% MS if PC has perk.
-			}
-			
-		if (!actor->IsRunning()) {
-			persi_actor_data->anim_speed = MS_mult;	
-		}
-		else if (actor->IsRunning() && !actor->IsSprinting()) {
-			persi_actor_data->anim_speed = speed_mult * WalkSpeedLimit;
-		} 
-		
-		
-		if (timer.ShouldRunFrame()) {
-				if (scale < 1.0) {
-					actor->SetActorValue(ActorValue::kSpeedMult, trans_actor_data->base_walkspeedmult * scale);
-				} else
-				{
-					actor->SetActorValue(ActorValue::kSpeedMult, ((trans_actor_data->base_walkspeedmult * (Bonus/3 + 1.0)))/ (MS_mult)/MS_mult_limit/Multy/PerkSpeed);
-				}
-		}
-		// Experiement
-		if (false) {
-			auto& rot_speed = actor->currentProcess->middleHigh->rotationSpeed;
-			if (fabs(rot_speed.x) > 1e-5 || fabs(rot_speed.y) > 1e-5 || fabs(rot_speed.z) > 1e-5) {
-				log::info("{} rotationSpeed: {},{},{}", actor_name(actor), rot_speed.x,rot_speed.y,rot_speed.z);
-				actor->currentProcess->middleHigh->rotationSpeed.x *= speed_mult;
-				actor->currentProcess->middleHigh->rotationSpeed.y *= speed_mult;
-				actor->currentProcess->middleHigh->rotationSpeed.z *= speed_mult;
-			}
-			auto& animationDelta = actor->currentProcess->high->animationDelta;
-			if (fabs(animationDelta.x) > 1e-5 || fabs(animationDelta.y) > 1e-5 || fabs(animationDelta.z) > 1e-5) {
-				log::info("{} animationDelta: {},{},{}", actor_name(actor), animationDelta.x,animationDelta.y,animationDelta.z);
-			}
-			auto& animationAngleMod = actor->currentProcess->high->animationAngleMod;
-			if (fabs(animationAngleMod.x) > 1e-5 || fabs(animationAngleMod.y) > 1e-5 || fabs(animationAngleMod.z) > 1e-5) {
-				log::info("{} animationAngleMod: {},{},{}", actor_name(actor), animationAngleMod.x,animationAngleMod.y,animationAngleMod.z);
-			}
-			auto& pathingCurrentRotationSpeed = actor->currentProcess->high->pathingCurrentRotationSpeed;
-			if (fabs(pathingCurrentRotationSpeed.x) > 1e-5 || fabs(pathingCurrentRotationSpeed.y) > 1e-5 || fabs(pathingCurrentRotationSpeed.z) > 1e-5) {
-				log::info("{} pathingCurrentRotationSpeed: {},{},{}", actor_name(actor), pathingCurrentRotationSpeed.x,pathingCurrentRotationSpeed.y,pathingCurrentRotationSpeed.z);
-			}
-			auto& pathingDesiredRotationSpeed = actor->currentProcess->high->pathingDesiredRotationSpeed;
-			if (fabs(pathingDesiredRotationSpeed.x) > 1e-5 || fabs(pathingDesiredRotationSpeed.y) > 1e-5 || fabs(pathingDesiredRotationSpeed.z) > 1e-5) {
-				log::info("{} pathingDesiredRotationSpeed: {},{},{}", actor_name(actor), pathingDesiredRotationSpeed.x,pathingDesiredRotationSpeed.y,pathingDesiredRotationSpeed.z);
-			}
-		}
-	}
-
 	void update_effective_multi(Actor* actor, ActorData* persi_actor_data, TempActorData* trans_actor_data) {
 		if (!actor) {
 			return;
@@ -328,8 +237,7 @@ namespace {
 		float BalanceMode = SizeManager::GetSingleton().BalancedMode();
 		float scale = get_visual_scale(actor);
 		float BonusShrink = 1.0;
-		if (BalanceMode >= 2.0)
-		{
+		if (BalanceMode >= 2.0) {
 			BonusShrink = (2.0 * (scale * 2));
 		}
 
@@ -340,8 +248,7 @@ namespace {
 					shrinkRate = 0.00086 * (((BalanceMode) * BonusShrink) * 1.5);
 				} else if (QuestStage >= 60 && QuestStage < 70) {
 					shrinkRate = 0.00086 * (((BalanceMode) * BonusShrink) * 1.0);
-				} else if (BalanceMode >= 2.0 && QuestStage > 70)
-				{
+				} else if (BalanceMode >= 2.0 && QuestStage > 70) {
 					shrinkRate = 0.00086 * (((BalanceMode) * BonusShrink) * 1.0);
 				}
 
@@ -356,9 +263,7 @@ namespace {
 					game_mode_int = 0; // Nothing to do
 				}
 			}
-		}
-
-		else if (QuestStage > 100.0 && BalanceMode <= 1.0) {
+		} else if (QuestStage > 100.0 && BalanceMode <= 1.0) {
 			if (actor->formID == 0x14) {
 				game_mode_int = runtime.ChosenGameMode->value;
 				growthRate = runtime.GrowthModeRate->value;
@@ -369,7 +274,7 @@ namespace {
 				growthRate = runtime.GrowthModeRateNPC->value;
 				shrinkRate = runtime.ShrinkModeRateNPC->value;
 			}
-		} 
+		}
 
 		if (game_mode_int >=0 && game_mode_int <= 4) {
 			gameMode = static_cast<ChosenGameMode>(game_mode_int);
@@ -432,5 +337,3 @@ void GtsManager::reapply_actor(Actor* actor, bool force) {
 	}
 	apply_actor(actor, force);
 }
-
-
