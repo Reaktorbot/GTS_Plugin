@@ -73,8 +73,8 @@ namespace Gts {
 			SizeDifference = clamp(1.0, 8.0, (get_target_scale(caster)/get_target_scale(target))/2);
 		}
 		
-		float TotalPower = this->power *= 2.0
-		float TotalEfficiency = this->efficiency *= 2.0
+		float TotalPower = this->power * 2.0
+		float TotalEfficiency = this->efficiency * 2.0
 		
 		bool has_smt = caster->HasMagicEffect(Runtime::GetSingleton().SmallMassiveThreat);
 		TransferSize(caster, target, IsDualCasting(), TotalPower * SizeDifference, TotalEfficiency, has_smt);
